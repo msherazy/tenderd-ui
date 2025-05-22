@@ -1,3 +1,4 @@
+import './index.css';
 import { useState, useEffect } from 'react';
 type Vehicle = {
     id: string;
@@ -113,7 +114,7 @@ const mockVehicles: Vehicle[] = [
     },
 ];
 
-const VehicleDashboard = () => {
+const App = () => {
     const [darkMode, setDarkMode] = useState(false);
     const [vehicles, setVehicles] = useState<Vehicle[]>([]);
     const [loading, setLoading] = useState(true);
@@ -1045,4 +1046,4 @@ const SearchInput = ({
     );
 };
 
-export default VehicleDashboard;
+export default App;
