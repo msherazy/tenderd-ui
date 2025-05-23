@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+/* Add cursor pointer to interactive elements */
+button:not(:disabled),
+a[href],
+.clickable,
+[role="button"],
+[type="checkbox"],
+[type="radio"],
+select,
+summary,
+.link,
+.btn,
+.card-clickable,
+.table-row-clickable,
+.icon-button {
+  cursor: pointer;
+}

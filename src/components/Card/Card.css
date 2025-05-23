@@ -1,0 +1,15 @@
+/* ...existing code... */
+
+.card.interactive,
+.card[onClick] {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card.interactive:hover,
+.card[onClick]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ...existing code... */
