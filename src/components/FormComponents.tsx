@@ -1,6 +1,22 @@
 // Form components for the vehicle dashboard
 import React from 'react';
 
+// Define consistent input styles to reuse across all form components
+const inputBaseStyles = `
+  block w-full rounded-md shadow-sm px-3 py-2
+  border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 
+  dark:border-gray-600 dark:bg-gray-700 dark:text-white
+`;
+
+const inputErrorStyles = `
+  border-red-300 focus:ring-red-500 focus:border-red-500 
+  dark:border-red-700
+`;
+
+const labelStyles = `
+  block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1
+`;
+
 export const FormInput = ({
     label,
     name,
@@ -29,9 +45,9 @@ export const FormInput = ({
     return (
         <div>
             {!noLabel && (
-                <label htmlFor={name} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label htmlFor={name} className={labelStyles}>
                     {label}
-                    {required && <span className="text-red-500">*</span>}
+                    {required && <span className="text-red-500 ml-1">*</span>}
                 </label>
             )}
             <input
@@ -43,10 +59,7 @@ export const FormInput = ({
                 min={min}
                 max={max}
                 placeholder={placeholder}
-                className={`block w-full rounded-md shadow-sm ${error
-                    ? 'border-red-300 focus:ring-red-500 focus:border-red-500 dark:border-red-700'
-                    : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 dark:border-gray-600'} 
-                dark:bg-gray-700 dark:text-white`}
+                className={`${inputBaseStyles} ${error ? inputErrorStyles : ''}`}
             />
             {error && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{error}</p>}
         </div>
@@ -60,6 +73,8 @@ export const FormSelect = ({
     onChange,
     options,
     noLabel = false,
+    error,
+    required = false,
 }: {
     label: string;
     name: string;
@@ -67,15 +82,18 @@ export const FormSelect = ({
     onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
     options: { value: string; label: string }[];
     noLabel?: boolean;
+    error?: string;
+    required?: boolean;
 }) => {
     return (
-        <div className="w-full sm:w-auto">
+        <div className="w-full">
             {!noLabel && (
                 <label
                     htmlFor={name}
-                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                    className={labelStyles}
                 >
                     {label}
+                    {required && <span className="text-red-500 ml-1">*</span>}
                 </label>
             )}
             <select
@@ -83,7 +101,7 @@ export const FormSelect = ({
                 id={name}
                 value={value}
                 onChange={onChange}
-                className="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                className={`${inputBaseStyles} ${error ? inputErrorStyles : ''}`}
             >
                 {options.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -91,6 +109,7 @@ export const FormSelect = ({
                     </option>
                 ))}
             </select>
+            {error && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{error}</p>}
         </div>
     );
 };
@@ -123,7 +142,7 @@ export const SearchInput = ({
             </div>
             <input
                 type="text"
-                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white dark:bg-gray-700 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:text-white sm:text-sm"
+                className={`${inputBaseStyles} pl-10`}
                 placeholder={placeholder || 'Search...'}
                 value={value}
                 onChange={onChange}

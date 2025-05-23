@@ -1,8 +1,28 @@
 /* ...existing code... */
 
+.table {
+  color: var(--text-primary);
+  background-color: var(--background-primary);
+  border-color: var(--border-color);
+}
+
+.table thead th {
+  color: var(--heading-color);
+  background-color: var(--background-secondary);
+}
+
+.table tbody tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
 .table-row:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: var(--table-row-hover);
   cursor: pointer;
+}
+
+/* For dark mode striped tables */
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: var(--background-secondary);
 }
 
 /* ...existing code... */

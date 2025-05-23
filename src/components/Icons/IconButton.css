@@ -8,10 +8,19 @@
   padding: 8px;
   border-radius: 50%;
   transition: background-color 0.2s;
+  color: var(--text-primary);
 }
 
 .icon-button:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: var(--table-row-hover);
+}
+
+.icon-button.primary {
+  color: #3182ce; /* Keep a consistent blue color across themes */
+}
+
+.icon-button.danger {
+  color: #e53e3e; /* Keep a consistent red color across themes */
 }
 
 /* ...existing code... */
