@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import type {Vehicle, VehicleFormData} from '../types';
-import { fetchVehicles, addVehicle as addVehicleService } from '../services/vehicleService';
 
 interface VehicleState {
     vehicles: Vehicle[];
@@ -43,10 +42,7 @@ const DEFAULT_FORM_DATA: VehicleFormData = {
     licensePlate: '',
     mileage: 0,
     lastServiceDate: new Date().toISOString().split('T')[0],
-    color: '',
     fuelType: 'Gasoline',
-    location: '',
-    vin: '',
     purchaseDate: new Date().toISOString().split('T')[0],
 };
 
@@ -68,10 +64,13 @@ export const useVehicleStore = create<VehicleState>((set, get) => ({
     fetchVehicles: async () => {
         set({ loading: true, error: null });
         try {
-            const vehicles = await fetchVehicles();
-            set({ vehicles, loading: false });
+            // Mock API call - replace with actual API call
+            const response = await new Promise<Vehicle[]>(resolve =>
+                setTimeout(() => resolve([]), 500)
+            );
+            set({ vehicles: response, loading: false });
         } catch (error) {
-            set({ error: 'Failed to load vehicles. Please try again later.', loading: false });
+            set({ error: (error as Error).message, loading: false });
         }
     },
 
@@ -118,26 +117,10 @@ export const useVehicleStore = create<VehicleState>((set, get) => ({
         }
         if (!formData.licensePlate.trim()) errors.licensePlate = 'License plate is required';
         if (formData.mileage < 0) errors.mileage = 'Mileage must be positive';
-        if (!formData.vin.trim()) errors.vin = 'VIN is required';
         if (!formData.purchaseDate) errors.purchaseDate = 'Purchase date is required';
 
         set({ formErrors: errors });
         return Object.keys(errors).length === 0;
-    },
-
-    submitVehicleForm: async () => {
-        if (!get().validateForm()) return;
-
-        try {
-            const newVehicle = await addVehicleService(get().formData);
-            set(state => ({
-                vehicles: [...state.vehicles, newVehicle],
-                showAddForm: false
-            }));
-            get().resetFormData();
-        } catch (error) {
-            set({ error: 'Failed to add vehicle. Please try again.' });
-        }
     },
 
     setSearchTerm: (term: string) => {
@@ -165,5 +148,34 @@ export const useVehicleStore = create<VehicleState>((set, get) => ({
         set(state => ({
             sortDirection: state.sortDirection === 'asc' ? 'desc' : 'asc'
         }));
+    },
+
+    submitVehicleForm: async () => {
+        const isValid = get().validateForm();
+        if (!isValid) return;
+
+        set({ loading: true, error: null });
+        try {
+            const { formData } = get();
+            // Mock API call - replace with actual API call
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            // Generate a mock ID for the new vehicle
+            const newVehicle: Vehicle = {
+                ...formData,
+                id: `v-${Date.now()}`,
+                dailyUsage: [0, 0, 0, 0, 0, 0, 0],
+                weeklyUsage: [0, 0, 0, 0]
+            };
+
+            set(state => ({
+                vehicles: [...state.vehicles, newVehicle],
+                loading: false,
+                showAddForm: false
+            }));
+            get().resetFormData();
+        } catch (error) {
+            set({ error: (error as Error).message, loading: false });
+        }
     }
 }));

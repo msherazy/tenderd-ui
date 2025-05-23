@@ -83,14 +83,6 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
                             required
                         />
                         <FormInput
-                            label="VIN"
-                            name="vin"
-                            value={formData.vin}
-                            onChange={onFormChange}
-                            error={formErrors.vin}
-                            required
-                        />
-                        <FormInput
                             label="Mileage"
                             name="mileage"
                             type="number"
@@ -110,44 +102,19 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
                                 { value: 'Inactive', label: 'Inactive' },
                             ]}
                         />
+                        <FormSelect
+                            label="Fuel Type"
+                            name="fuelType"
+                            value={formData.fuelType}
+                            onChange={onFormChange}
+                            options={[
+                                { value: 'Gasoline', label: 'Gasoline' },
+                                { value: 'Diesel', label: 'Diesel' },
+                                { value: 'Electric', label: 'Electric' },
+                                { value: 'Hybrid', label: 'Hybrid' },
+                            ]}
+                        />
                     </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                    <FormInput
-                        label="Color"
-                        name="color"
-                        value={formData.color}
-                        onChange={onFormChange}
-                    />
-                    <FormSelect
-                        label="Fuel Type"
-                        name="fuelType"
-                        value={formData.fuelType}
-                        onChange={onFormChange}
-                        options={[
-                            { value: 'Gasoline', label: 'Gasoline' },
-                            { value: 'Diesel', label: 'Diesel' },
-                            { value: 'Electric', label: 'Electric' },
-                            { value: 'Hybrid', label: 'Hybrid' },
-                        ]}
-                    />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                    <FormInput
-                        label="Location"
-                        name="location"
-                        value={formData.location}
-                        onChange={onFormChange}
-                    />
-                    <FormInput
-                        label="Purchase Date"
-                        name="purchaseDate"
-                        type="date"
-                        value={formData.purchaseDate}
-                        onChange={onFormChange}
-                        error={formErrors.purchaseDate}
-                        required
-                    />
                 </div>
                 <div className="mt-8">
                     <button

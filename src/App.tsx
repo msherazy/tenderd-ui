@@ -1,41 +1,27 @@
 import './index.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useVehicleStore } from './features/vehicleStore';
 import { FormSelect, SearchInput } from './components/FormComponents';
-import { VehicleList } from './components/VehicleList';
+import { useVehicles } from './hooks';
 import { VehicleDetails } from './components/VehicleDetails';
 import { AddVehicleForm } from './components/AddVehicleForm';
+import {VehicleList} from "./components/VehicleList.tsx";
 
 const App = () => {
     const [darkMode, setDarkMode] = useState(false);
+    const { vehicles, loading, error } = useVehicles();
 
+    console.log('vehicles: ',vehicles);
     // Get state and actions from our store
     const {
-        vehicles, loading, error, selectedVehicle, activeTab, showAddForm,
+        selectedVehicle, activeTab, showAddForm,
         formData, formErrors, searchTerm, filterType, filterStatus,
         sortField, sortDirection,
 
-        fetchVehicles, selectVehicle, setActiveTab, clearSelectedVehicle,
+        selectVehicle, setActiveTab, clearSelectedVehicle,
         toggleAddForm, updateFormData, submitVehicleForm,
         setSearchTerm, setFilterType, setFilterStatus, setSortField
     } = useVehicleStore();
-
-    useEffect(() => {
-        // Fetch vehicles on component mount
-        fetchVehicles();
-
-        // Check for dark mode preference
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setDarkMode(prefersDark);
-    }, [fetchVehicles]);
-
-    useEffect(() => {
-        if (darkMode) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    }, [darkMode]);
 
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);

@@ -162,17 +162,6 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 };
 
 const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
-    // Extract coordinates from location string or use default values
-    const getCoordinates = () => {
-        const match = vehicle.location.match(/\((-?\d+\.\d+),(-?\d+\.\d+)\)/);
-        return match ? { lat: match[1], lng: match[2] } : { lat: "25.077635", lng: "54.988815" }; // Default to Dubai if no coords
-    };
-
-    const { lat, lng } = getCoordinates();
-    
-    // Google Maps Embed URL - using the provided iframe src but with dynamic coordinates
-    const mapEmbedUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5000!3d${lat}!3d${lng}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDA0JzM5LjUiTiA1NMKwNTknMTkuNyJF!5e0!3m2!1sen!2s!4v1747986284897!5m2!1sen!2s`;
-    
     // Use the original embed if you want to keep the Tenderd office marker
     const originalEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115638.89114074553!2d54.98881503695701!3d25.077635277788172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6d39dfcc406f%3A0xc2dd0ddf6fbc0db5!2sTenderd%20-%20AI%20Powered%20Fleet%20Management%20Platform!5e0!3m2!1sen!2s!4v1747986284897!5m2!1sen!2s";
 
