@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import type { Vehicle } from '../types';
+import type { MaintenanceFormData, Vehicle } from '../types';
 import { StatusBadge, VehicleTypeBadge } from './Badges';
 import { DetailRow } from './Card/Card.tsx';
 import { AddMaintenanceForm } from './AddMaintenanceForm';
+import { useCreateMaintenance } from '../hooks';
 
 interface VehicleDetailsProps {
 	vehicle: Vehicle;
@@ -127,8 +128,51 @@ const DetailsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 // Maintenance Tab
 const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 	const [showForm, setShowForm] = useState(false);
-	const handleAdd = () => setShowForm(true);
-	const handleCancel = () => setShowForm(false);
+	const [formData, setFormData] = useState<MaintenanceFormData>({
+		date: '',
+		description: '',
+		cost: 0,
+		mileage: undefined,
+		serviceCenter: '',
+		notes: '',
+		nextDueDate: undefined,
+	});
+	const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+
+	const { mutateAsync, loading } = useCreateMaintenance(vehicle._id);
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value, type } = e.target;
+		setFormData(prev => ({
+			...prev,
+			[name]: type === 'number' ? Number(value) : value,
+		}));
+	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		try {
+			const newEntry = await mutateAsync(formData);
+			// Optionally append newEntry to vehicle.maintenanceHistory here
+			setShowForm(false);
+			setFormData({
+				date: '',
+				description: '',
+				cost: 0,
+				mileage: undefined,
+				serviceCenter: '',
+				notes: '',
+				nextDueDate: undefined,
+			});
+		} catch (err) {
+			// handle validation errors if provided
+		}
+	};
+
+	const handleCancel = () => {
+		setShowForm(false);
+		setFormErrors({});
+	};
 
 	return (
 		<div>
@@ -137,7 +181,7 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 					Maintenance History
 				</h3>
 				<button
-					onClick={handleAdd}
+					onClick={() => setShowForm(true)}
 					className="px-4 py-2 bg-indigo-600 dark:bg-indigo-500 text-white rounded-md hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors"
 				>
 					Add Maintenance
@@ -146,18 +190,10 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 
 			{showForm && (
 				<AddMaintenanceForm
-					formData={{
-						date: '',
-						description: '',
-						cost: 0,
-						mileage: undefined,
-						serviceCenter: '',
-						notes: '',
-						nextDueDate: undefined,
-					}}
-					formErrors={{}}
-					onFormChange={() => {}}
-					onFormSubmit={() => {}}
+					formData={formData}
+					formErrors={formErrors}
+					onFormChange={handleChange}
+					onFormSubmit={handleSubmit}
 					onCancel={handleCancel}
 				/>
 			)}
@@ -201,7 +237,7 @@ const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => (
 );
 
 // Analytics Tab
-const AnalyticsTab: React.FC<{ vehicle: Vehicle }> = () => (
+const AnalyticsTab: React.FC = () => (
 	<div>
 		<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
 			Analytics Unavailable

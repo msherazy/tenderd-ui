@@ -1,25 +1,24 @@
 import { useState } from 'react';
-import type { Vehicle } from '../types';
 import api from '../services/api';
 import axios from 'axios';
 
-export function useCreateVehicle() {
+export function useCreateMaintenance(vehicleId: string) {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
-	const mutateAsync = async (vehicle: Partial<Vehicle>) => {
+	const mutateAsync = async (entry: {
+		date: string;
+		description: string;
+		cost: number;
+		mileage?: number;
+		serviceCenter?: string;
+		notes?: string;
+		nextDueDate?: string;
+	}) => {
 		setLoading(true);
 		setError(null);
 		try {
-			// Add default usage data if not provided
-			const vehicleWithUsageData = {
-				...vehicle,
-				// Add mock usage data if not provided
-				dailyUsage: vehicle.dailyUsage || [10, 12, 8, 15, 9, 11, 7],
-				weeklyUsage: vehicle.weeklyUsage || [70, 65, 80, 75],
-			};
-
-			const res = await api.post('/vehicles', vehicleWithUsageData);
+			const res = await api.post(`/maintenance/${vehicleId}`, entry);
 			return res.data;
 		} catch (err: unknown) {
 			let msg = 'Failed to add maintenance';
