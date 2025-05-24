@@ -18,20 +18,23 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
     onCancel
 }) => {
     return (
-        <div className="bg-white shadow rounded-lg p-6">
+        <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 border border-gray-100 dark:border-gray-700">
             <div className="flex justify-between items-start mb-6">
-                <h2 className="text-2xl font-bold text-gray-900">Add New Vehicle</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Add New Vehicle</h2>
                 <button
                     onClick={onCancel}
-                    className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300"
+                    className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                 >
                     Cancel
                 </button>
             </div>
 
-            <form onSubmit={onFormSubmit}>
+            <form onSubmit={onFormSubmit} className="dark:bg-gray-800">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-4">
+                    <div className="space-y-4 bg-gray-50 dark:bg-gray-750 p-5 rounded-lg shadow-sm">
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
+                            Vehicle Details
+                        </h3>
                         <FormInput
                             label="Make"
                             name="make"
@@ -82,7 +85,10 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
                             pattern="[A-Za-z ]*"
                         />
                     </div>
-                    <div className="space-y-4">
+                    <div className="space-y-4 bg-gray-50 dark:bg-gray-750 p-5 rounded-lg shadow-sm">
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
+                            Additional Information
+                        </h3>
                         <FormInput
                             label="License Plate"
                             name="licensePlate"
@@ -141,7 +147,7 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
                 <div className="mt-8">
                     <button
                         type="submit"
-                        className="w-full md:w-auto px-6 py-3 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        className="w-full md:w-auto px-6 py-3 bg-indigo-600 dark:bg-indigo-500 text-white font-medium rounded-md hover:bg-indigo-700 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                     >
                         Add Vehicle
                     </button>
