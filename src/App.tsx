@@ -1,15 +1,46 @@
 import './index.css';
+import { useState, useEffect } from 'react';
 import { useVehicleStore } from './features/vehicleStore';
 import { FormSelect, SearchInput } from './components/FormComponents';
 import { useVehicles } from './hooks';
 import { VehicleDetails } from './components/VehicleDetails';
 import { AddVehicleForm } from './components/AddVehicleForm';
-import {VehicleList} from "./components/VehicleList.tsx";
+import { VehicleList } from "./components/VehicleList.tsx";
 import { useCreateVehicle } from './hooks';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
 
 const App = () => {
     const { vehicles, loading, error } = useVehicles();
     const createVehicle = useCreateVehicle();
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    useEffect(() => {
+        // Check for user's preferred color scheme or saved preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            setIsDarkMode(true);
+            document.documentElement.classList.add('dark');
+        } else {
+            setIsDarkMode(false);
+            document.documentElement.classList.remove('dark');
+        }
+    }, []);
+
+    const toggleDarkMode = () => {
+        const newDarkMode = !isDarkMode;
+        setIsDarkMode(newDarkMode);
+
+        if (newDarkMode) {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+        }
+    };
 
     // Get state and actions from our store
     const {
@@ -72,90 +103,90 @@ const App = () => {
     });
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            <div className="container mx-auto px-4 py-8">
-                <header className="flex justify-between items-center mb-8">
-                    <h1 className="text-3xl font-bold text-gray-900">Vehicle Fleet Management</h1>
-                </header>
-
-                {!selectedVehicle && !showAddForm && (
-                    <div className="mb-8">
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-                            <div className="w-full md:w-auto">
-                                <SearchInput
-                                    value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
-                                    placeholder="Search vehicles..."
-                                />
+        <div className="flex flex-col min-h-screen">
+            <Header onThemeToggle={toggleDarkMode} isDarkMode={isDarkMode} />
+            <main className={`flex-grow ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-50'}`}>
+                <div className="container mx-auto px-4 py-8">
+                    {!selectedVehicle && !showAddForm && (
+                        <div className="mb-8">
+                            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                                <div className="w-full md:w-auto">
+                                    <SearchInput
+                                        value={searchTerm}
+                                        onChange={(e) => setSearchTerm(e.target.value)}
+                                        placeholder="Search vehicles..."
+                                    />
+                                </div>
+                                <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                                    <FormSelect
+                                        label="Filter by Type"
+                                        name="filterType"
+                                        value={filterType}
+                                        onChange={(e) => setFilterType(e.target.value)}
+                                        options={[
+                                            { value: 'all', label: 'All Types' },
+                                            { value: 'Sedan', label: 'Sedan' },
+                                            { value: 'SUV', label: 'SUV' },
+                                            { value: 'Truck', label: 'Truck' },
+                                            { value: 'Van', label: 'Van' },
+                                            { value: 'Electric', label: 'Electric' },
+                                        ]}
+                                        noLabel
+                                    />
+                                    <FormSelect
+                                        label="Filter by Status"
+                                        name="filterStatus"
+                                        value={filterStatus}
+                                        onChange={(e) => setFilterStatus(e.target.value)}
+                                        options={[
+                                            { value: 'all', label: 'All Statuses' },
+                                            { value: 'Active', label: 'Active' },
+                                            { value: 'Maintenance', label: 'Maintenance' },
+                                            { value: 'Inactive', label: 'Inactive' },
+                                        ]}
+                                        noLabel
+                                    />
+                                    <button
+                                        onClick={() => toggleAddForm(true)}
+                                        className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+                                    >
+                                        Add Vehicle
+                                    </button>
+                                </div>
                             </div>
-                            <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-                                <FormSelect
-                                    label="Filter by Type"
-                                    name="filterType"
-                                    value={filterType}
-                                    onChange={(e) => setFilterType(e.target.value)}
-                                    options={[
-                                        { value: 'all', label: 'All Types' },
-                                        { value: 'Sedan', label: 'Sedan' },
-                                        { value: 'SUV', label: 'SUV' },
-                                        { value: 'Truck', label: 'Truck' },
-                                        { value: 'Van', label: 'Van' },
-                                        { value: 'Electric', label: 'Electric' },
-                                    ]}
-                                    noLabel
-                                />
-                                <FormSelect
-                                    label="Filter by Status"
-                                    name="filterStatus"
-                                    value={filterStatus}
-                                    onChange={(e) => setFilterStatus(e.target.value)}
-                                    options={[
-                                        { value: 'all', label: 'All Statuses' },
-                                        { value: 'Active', label: 'Active' },
-                                        { value: 'Maintenance', label: 'Maintenance' },
-                                        { value: 'Inactive', label: 'Inactive' },
-                                    ]}
-                                    noLabel
-                                />
-                                <button
-                                    onClick={() => toggleAddForm(true)}
-                                    className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
-                                >
-                                    Add Vehicle
-                                </button>
-                            </div>
+                            <VehicleList
+                                vehicles={sortedVehicles}
+                                loading={loading}
+                                error={error}
+                                sortField={sortField}
+                                sortDirection={sortDirection}
+                                onVehicleSelect={selectVehicle}
+                                onSort={setSortField}
+                            />
                         </div>
-                        <VehicleList
-                            vehicles={sortedVehicles}
-                            loading={loading}
-                            error={error}
-                            sortField={sortField}
-                            sortDirection={sortDirection}
-                            onVehicleSelect={selectVehicle}
-                            onSort={setSortField}
+                    )}
+
+                    {selectedVehicle && (
+                        <VehicleDetails
+                            vehicle={selectedVehicle}
+                            activeTab={activeTab}
+                            onTabChange={setActiveTab}
+                            onBack={clearSelectedVehicle}
                         />
-                    </div>
-                )}
+                    )}
 
-                {selectedVehicle && (
-                    <VehicleDetails
-                        vehicle={selectedVehicle}
-                        activeTab={activeTab}
-                        onTabChange={setActiveTab}
-                        onBack={clearSelectedVehicle}
-                    />
-                )}
-
-                {showAddForm && (
-                    <AddVehicleForm
-                        formData={formData}
-                        formErrors={formErrors}
-                        onFormChange={handleFormChange}
-                        onFormSubmit={handleFormSubmit}
-                        onCancel={() => toggleAddForm(false)}
-                    />
-                )}
-            </div>
+                    {showAddForm && (
+                        <AddVehicleForm
+                            formData={formData}
+                            formErrors={formErrors}
+                            onFormChange={handleFormChange}
+                            onFormSubmit={handleFormSubmit}
+                            onCancel={() => toggleAddForm(false)}
+                        />
+                    )}
+                </div>
+            </main>
+            <Footer />
         </div>
     );
 };

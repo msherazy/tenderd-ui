@@ -97,7 +97,7 @@ const DetailsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
                     <DetailRow label="Status" value={<StatusBadge status={vehicle.status} />} />
                     <DetailRow 
                         label="Mileage" 
-                        value={`${vehicle.mileage.toLocaleString()} miles`} 
+                        value={`${vehicle.mileage.toLocaleString()} miles`}
                     />
                     <DetailRow
                         label="Last Service"
@@ -234,7 +234,7 @@ const AnalyticsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
                     </h4>
                     <div className="h-64">
                         <div className="flex items-end h-48 space-x-1">
-                            {vehicle.dailyUsage.map((miles, index) => (
+                            {vehicle?.dailyUsage?.map((miles, index) => (
                                 <div key={index} className="flex flex-col items-center flex-1">
                                     <div
                                         className="w-full bg-indigo-500 dark:bg-indigo-600 rounded-t hover:bg-indigo-600 dark:hover:bg-indigo-500 transition-colors"
@@ -254,7 +254,7 @@ const AnalyticsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
                     </h4>
                     <div className="h-64">
                         <div className="flex items-end h-48 space-x-4 justify-around">
-                            {vehicle.weeklyUsage.map((miles, index) => (
+                            {vehicle?.weeklyUsage?.map((miles, index) => (
                                 <div key={index} className="flex flex-col items-center">
                                     <div
                                         className="w-8 bg-green-500 dark:bg-green-600 rounded-t hover:bg-green-600 dark:hover:bg-green-500 transition-colors"
