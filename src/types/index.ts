@@ -1,5 +1,7 @@
+import type { ReactNode } from 'react';
+
 export interface Vehicle {
-	location: ReactNode;
+	location?: ReactNode;
 	updatedAt: string | number | Date;
 	createdAt: string | number | Date;
 	_id: string;
@@ -32,6 +34,17 @@ export interface Maintenance {
 	nextDueDate?: string | Date;
 	createdAt: string | Date;
 	updatedAt: string | Date;
+}
+
+export interface MaintenanceFormData {
+	date: string; // e.g. "2025-05-20"
+	description: string;
+	cost: number;
+
+	mileage?: number;
+	serviceCenter: string; // default to "" if not provided
+	notes: string; // default to "" if not provided
+	nextDueDate?: string; // e.g. "2025-11-20"
 }
 
 export type VehicleFormData = Omit<Vehicle, 'id' | 'dailyUsage' | 'weeklyUsage'>;

@@ -45,6 +45,8 @@ const DEFAULT_FORM_DATA: VehicleFormData = {
 	purchaseDate: new Date().toISOString().split('T')[0],
 	color: '',
 	vin: '',
+	updatedAt: '',
+	createdAt: '',
 };
 
 export const useVehicleStore = create<VehicleState>((set, get) => ({
