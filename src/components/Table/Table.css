@@ -1,5 +1,3 @@
-/* ...existing code... */
-
 .table {
   color: var(--text-primary);
   background-color: var(--background-primary);
@@ -24,5 +22,3 @@
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: var(--background-secondary);
 }
-
-/* ...existing code... */

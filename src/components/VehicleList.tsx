@@ -72,7 +72,7 @@ export const VehicleList: React.FC<VehicleListProps> = ({
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                    {vehicles.map(vehicle => (
+                    {vehicles?.map(vehicle => (
                         <tr key={vehicle.id} className="hover:bg-gray-50">
                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 {vehicle.make}

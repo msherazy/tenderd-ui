@@ -5,10 +5,10 @@ import { FormSelect, SearchInput } from './components/FormComponents';
 import { useVehicles } from './hooks';
 import { VehicleDetails } from './components/VehicleDetails';
 import { AddVehicleForm } from './components/AddVehicleForm';
-import { VehicleList } from "./components/VehicleList.tsx";
 import { useCreateVehicle } from './hooks';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import {VehicleList} from "./components/VehicleList.tsx";
 
 const App = () => {
     const { vehicles, loading, error } = useVehicles();
@@ -65,7 +65,7 @@ const App = () => {
         e.preventDefault();
         const isValid = useVehicleStore.getState().validateForm();
         if (!isValid) return;
-        
+
         try {
             const { formData } = useVehicleStore.getState();
             const newVehicle = await createVehicle.mutateAsync(formData);
@@ -107,7 +107,8 @@ const App = () => {
             <Header onThemeToggle={toggleDarkMode} isDarkMode={isDarkMode} />
             <main className={`flex-grow ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-50'}`}>
                 <div className="container mx-auto px-4 py-8">
-                    {!selectedVehicle && !showAddForm && (
+                    <>
+                      {!selectedVehicle && !showAddForm && (
                         <div className="mb-8">
                             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                                 <div className="w-full md:w-auto">
@@ -117,7 +118,19 @@ const App = () => {
                                         placeholder="Search vehicles..."
                                     />
                                 </div>
-                                <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                                <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto items-center sm:items-end">
+                                    {(filterType !== 'all' || filterStatus !== 'all' || searchTerm) && (
+                                        <button
+                                            onClick={() => {
+                                                setFilterType('all');
+                                                setFilterStatus('all');
+                                                setSearchTerm('');
+                                            }}
+                                            className="w-full text-sm text-indigo-600 hover:underline mt-2 sm:mt-0"
+                                        >
+                                            Clear Filters
+                                        </button>
+                                    )}
                                     <FormSelect
                                         label="Filter by Type"
                                         name="filterType"
@@ -148,7 +161,7 @@ const App = () => {
                                     />
                                     <button
                                         onClick={() => toggleAddForm(true)}
-                                        className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+                                        className="w-full px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
                                     >
                                         Add Vehicle
                                     </button>
@@ -164,18 +177,18 @@ const App = () => {
                                 onSort={setSortField}
                             />
                         </div>
-                    )}
+                      )}
 
-                    {selectedVehicle && (
+                      {selectedVehicle && (
                         <VehicleDetails
                             vehicle={selectedVehicle}
                             activeTab={activeTab}
                             onTabChange={setActiveTab}
                             onBack={clearSelectedVehicle}
                         />
-                    )}
+                      )}
 
-                    {showAddForm && (
+                      {showAddForm && (
                         <AddVehicleForm
                             formData={formData}
                             formErrors={formErrors}
@@ -183,7 +196,8 @@ const App = () => {
                             onFormSubmit={handleFormSubmit}
                             onCancel={() => toggleAddForm(false)}
                         />
-                    )}
+                      )}
+                    </>
                 </div>
             </main>
             <Footer />

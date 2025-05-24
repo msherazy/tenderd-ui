@@ -58,7 +58,6 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
                             min="2000"
                             max={(new Date().getFullYear() + 1).toString()}
                             required
-                            maxLength={4}
                             pattern="\\d{1,4}"
                         />
                         <FormSelect
