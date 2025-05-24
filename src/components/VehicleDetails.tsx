@@ -81,11 +81,10 @@ const DetailsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
                 </h3>
                 <div className="space-y-5">
                     <DetailRow label="VIN" value={vehicle.vin} />
-                    <DetailRow label="Color" value={vehicle.color} />
                     <DetailRow label="Fuel Type" value={vehicle.fuelType} />
                     <DetailRow 
                         label="Purchase Date" 
-                        value={new Date(vehicle.purchaseDate).toLocaleDateString()} 
+                        value={new Date(vehicle.createdAt).toLocaleDateString()}
                     />
                 </div>
             </div>
@@ -102,7 +101,7 @@ const DetailsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
                     />
                     <DetailRow
                         label="Last Service"
-                        value={new Date(vehicle.lastServiceDate).toLocaleDateString()}
+                        value={new Date(vehicle.updatedAt).toLocaleDateString()}
                     />
                 </div>
             </div>
@@ -200,25 +199,6 @@ const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
                             console.error("Map failed to load");
                         }}
                     ></iframe>
-                </div>
-                
-                <div className="mt-4">
-                    <div className="flex justify-between items-center">
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                            GPS Coordinates: {lat}, {lng}
-                        </p>
-                        <a 
-                            href={`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-sm text-blue-600 dark:text-blue-400 hover:underline flex items-center"
-                        >
-                            View on Google Maps
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                        </a>
-                    </div>
                 </div>
                 
                 <div className="mt-6 border-t border-gray-200 dark:border-gray-700 pt-4">

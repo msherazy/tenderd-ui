@@ -8,7 +8,9 @@ export interface Vehicle {
     licensePlate: string;
     mileage: number;
     lastServiceDate: string;
+    color: string;
     fuelType: 'Gasoline' | 'Diesel' | 'Electric' | 'Hybrid';
+    vin: string;
     purchaseDate: string;
     dailyUsage: number[];
     weeklyUsage: number[];

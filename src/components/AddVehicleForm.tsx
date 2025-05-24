@@ -71,6 +71,13 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
                                 { value: 'Van', label: 'Van' },
                                 { value: 'Electric', label: 'Electric' },
                             ]}
+                            required={true}
+                        />
+                        <FormInput
+                            label="Color"
+                            name="color"
+                            value={formData.color}
+                            onChange={onFormChange}
                         />
                     </div>
                     <div className="space-y-4">
@@ -80,6 +87,16 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
                             value={formData.licensePlate}
                             onChange={onFormChange}
                             error={formErrors.licensePlate}
+                            required
+                        />
+                        <FormInput
+                            label="VIN"
+                            name="vin"
+                            value={formData.vin}
+                            onChange={onFormChange}
+                            error={formErrors.vin}
+                            maxLength={17}
+                            minLength={17}
                             required
                         />
                         <FormInput
@@ -101,6 +118,7 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
                                 { value: 'Maintenance', label: 'Maintenance' },
                                 { value: 'Inactive', label: 'Inactive' },
                             ]}
+                            required={true}
                         />
                         <FormSelect
                             label="Fuel Type"
@@ -114,7 +132,7 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
                                 { value: 'Hybrid', label: 'Hybrid' },
                             ]}
                         />
-                    </div>
+                    </div>a
                 </div>
                 <div className="mt-8">
                     <button

@@ -5,11 +5,12 @@ import { useVehicles } from './hooks';
 import { VehicleDetails } from './components/VehicleDetails';
 import { AddVehicleForm } from './components/AddVehicleForm';
 import {VehicleList} from "./components/VehicleList.tsx";
+import { useCreateVehicle } from './hooks';
 
 const App = () => {
     const { vehicles, loading, error } = useVehicles();
+    const createVehicle = useCreateVehicle();
 
-    console.log('vehicles: ',vehicles);
     // Get state and actions from our store
     const {
         selectedVehicle, activeTab, showAddForm,
@@ -17,7 +18,7 @@ const App = () => {
         sortField, sortDirection,
 
         selectVehicle, setActiveTab, clearSelectedVehicle,
-        toggleAddForm, updateFormData, submitVehicleForm,
+        toggleAddForm, updateFormData,
         setSearchTerm, setFilterType, setFilterStatus, setSortField
     } = useVehicleStore();
 
@@ -29,9 +30,23 @@ const App = () => {
         );
     };
 
-    const handleFormSubmit = (e: React.FormEvent) => {
+    const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        submitVehicleForm();
+        const isValid = useVehicleStore.getState().validateForm();
+        if (!isValid) return;
+        
+        try {
+            const { formData } = useVehicleStore.getState();
+            const newVehicle = await createVehicle.mutateAsync(formData);
+            useVehicleStore.setState(state => ({
+                vehicles: [...state.vehicles, newVehicle],
+                showAddForm: false
+            }));
+            useVehicleStore.getState().resetFormData();
+        } catch (error) {
+            console.error('Failed to create vehicle:', error);
+            useVehicleStore.setState({ error: (error as Error).message });
+        }
     };
 
     // Filter and sort vehicles based on current filters and sort settings

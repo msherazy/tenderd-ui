@@ -44,6 +44,8 @@ const DEFAULT_FORM_DATA: VehicleFormData = {
     lastServiceDate: new Date().toISOString().split('T')[0],
     fuelType: 'Gasoline',
     purchaseDate: new Date().toISOString().split('T')[0],
+    color: '',
+    vin: ''
 };
 
 export const useVehicleStore = create<VehicleState>((set, get) => ({
@@ -108,6 +110,7 @@ export const useVehicleStore = create<VehicleState>((set, get) => ({
 
     validateForm: () => {
         const { formData } = get();
+        console.log(formData);
         const errors: Record<string, string> = {};
 
         if (!formData.make.trim()) errors.make = 'Make is required';
@@ -117,6 +120,13 @@ export const useVehicleStore = create<VehicleState>((set, get) => ({
         }
         if (!formData.licensePlate.trim()) errors.licensePlate = 'License plate is required';
         if (formData.mileage < 0) errors.mileage = 'Mileage must be positive';
+        if (!formData.vin?.trim()) {
+            errors.vin = 'VIN is required';
+        } else if (formData.vin.length !== 17) {
+            errors.vin = 'VIN must be exactly 17 characters';
+        }
+        if (!formData.type?.trim()) errors.type = 'Vehicle Type is required';
+        if (!formData.status?.trim()) errors.status = 'Status is required';
         if (!formData.purchaseDate) errors.purchaseDate = 'Purchase date is required';
 
         set({ formErrors: errors });
@@ -164,8 +174,8 @@ export const useVehicleStore = create<VehicleState>((set, get) => ({
             const newVehicle: Vehicle = {
                 ...formData,
                 id: `v-${Date.now()}`,
-                dailyUsage: [0, 0, 0, 0, 0, 0, 0],
-                weeklyUsage: [0, 0, 0, 0]
+                dailyUsage: [10, 12, 8, 15, 9, 11, 7],   // mock data
+                weeklyUsage: [70, 65, 80, 75]
             };
 
             set(state => ({
