@@ -1,29 +1,31 @@
 /* ...existing code... */
 
 .card {
-  background-color: var(--background-primary);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
+	background-color: var(--background-primary);
+	color: var(--text-primary);
+	border: 1px solid var(--border-color);
 }
 
 .card .card-title {
-  color: var(--heading-color);
+	color: var(--heading-color);
 }
 
 .card .card-subtitle {
-  color: var(--text-secondary);
+	color: var(--text-secondary);
 }
 
 .card.interactive,
 .card[onClick] {
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+	cursor: pointer;
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
 }
 
 .card.interactive:hover,
 .card[onClick]:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px var(--card-shadow);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px var(--card-shadow);
 }
 
 /* ...existing code... */

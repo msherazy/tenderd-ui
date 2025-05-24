@@ -1,16 +1,16 @@
 import axios from 'axios';
 
 export type ApiResponse<T> = {
-  success: boolean;
-  data: T;
-  message: string;
-  status: number;
-  timestamp: string;
-  path: string;
+	success: boolean;
+	data: T;
+	message: string;
+	status: number;
+	timestamp: string;
+	path: string;
 };
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080/api/v1',
+	baseURL: 'http://localhost:8080/api/v1',
 });
 
 export default api;

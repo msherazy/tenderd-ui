@@ -1,53 +1,60 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
-  /* Light theme default variables */
-  --text-primary: #1a202c;
-  --text-secondary: #4a5568;
-  --background-primary: #ffffff;
-  --background-secondary: #f7fafc;
-  --table-row-hover: rgba(0, 0, 0, 0.04);
-  --card-shadow: rgba(0, 0, 0, 0.1);
-  --border-color: #e2e8f0;
-  --heading-color: #2d3748;
+	/* Light theme default variables */
+	--text-primary: #1a202c;
+	--text-secondary: #4a5568;
+	--background-primary: #ffffff;
+	--background-secondary: #f7fafc;
+	--table-row-hover: rgba(0, 0, 0, 0.04);
+	--card-shadow: rgba(0, 0, 0, 0.1);
+	--border-color: #e2e8f0;
+	--heading-color: #2d3748;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark theme variables */
-    --text-primary: #f7fafc;
-    --text-secondary: #e2e8f0;
-    --background-primary: #1a202c;
-    --background-secondary: #2d3748;
-    --table-row-hover: rgba(255, 255, 255, 0.08);
-    --card-shadow: rgba(0, 0, 0, 0.5);
-    --border-color: #4a5568;
-    --heading-color: #e2e8f0;
-  }
+	:root {
+		/* Dark theme variables */
+		--text-primary: #f7fafc;
+		--text-secondary: #e2e8f0;
+		--background-primary: #1a202c;
+		--background-secondary: #2d3748;
+		--table-row-hover: rgba(255, 255, 255, 0.08);
+		--card-shadow: rgba(0, 0, 0, 0.5);
+		--border-color: #4a5568;
+		--heading-color: #e2e8f0;
+	}
 }
 
 html {
-  font-family: 'PT Sans', sans-serif;
+	font-family: 'PT Sans', sans-serif;
 }
 
 body {
-  color: var(--text-primary);
-  background-color: var(--background-primary);
-  transition: background-color 0.3s, color 0.3s;
+	color: var(--text-primary);
+	background-color: var(--background-primary);
+	transition:
+		background-color 0.3s,
+		color 0.3s;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--heading-color);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--heading-color);
 }
 
 /* Add cursor pointer to interactive elements */
 button:not(:disabled),
 a[href],
 .clickable,
-[role="button"],
-[type="checkbox"],
-[type="radio"],
+[role='button'],
+[type='checkbox'],
+[type='radio'],
 select,
 summary,
 .link,
@@ -55,5 +62,5 @@ summary,
 .card-clickable,
 .table-row-clickable,
 .icon-button {
-  cursor: pointer;
+	cursor: pointer;
 }
