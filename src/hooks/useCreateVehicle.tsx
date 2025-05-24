@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Vehicle } from '../types';
+import api from '../services/api';
 
 export function useCreateVehicle() {
     const [loading, setLoading] = useState(false);
@@ -9,28 +10,12 @@ export function useCreateVehicle() {
         setLoading(true);
         setError(null);
         try {
-            const res = await fetch('http://localhost:8080/api/v1/vehicles', {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(vehicle),
-            });
-            
-            if (!res.ok) {
-                console.error('Error response:', res);
-                const errorData = await res.json();
-                throw new Error(errorData.message || 'Failed to create vehicle');
-            }
-            
-            const data = await res.json();
-            return data;
-        } catch (err) {
-            console.error('Failed to create vehicle:', err);
-            const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
+            const res = await api.post('/vehicles', vehicle);
+            return res.data;
+        } catch (err: any) {
+            const errorMessage = err?.response?.data?.message || err.message || 'Failed to create vehicle';
             setError(errorMessage);
-            throw err;
+            throw new Error(errorMessage);
         } finally {
             setLoading(false);
         }

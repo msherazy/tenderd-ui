@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { Vehicle } from '../types';
+import api from '../services/api';
 
 export function useVehicles() {
     const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -8,12 +9,12 @@ export function useVehicles() {
 
     useEffect(() => {
         setLoading(true);
-        fetch('http://localhost:8080/api/v1/vehicles')
-            .then(res => res.json())
-            .then(data => setVehicles(data.data))
-            .catch(err => setError(err.message))
+        api.get('/vehicles')
+            .then(res => setVehicles(res.data.data))
+            .catch(err => setError(err?.response?.data?.message || err.message))
             .finally(() => setLoading(false));
     }, []);
 
     return { vehicles, loading, error, setVehicles };
 }
+

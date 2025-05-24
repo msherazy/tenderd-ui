@@ -205,7 +205,7 @@ const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
                     <h4 className="text-md font-medium text-gray-900 dark:text-white mb-3">Location History</h4>
                     <ul className="space-y-2">
                         {[
-                            { location: vehicle?.location, time: 'Current' },
+                            { location: 'Main Office', time: 'Current' },
                             { location: 'Main Office', time: 'Yesterday' },
                             { location: 'Field Site #3', time: '2 days ago' }
                         ].map((item, index) => (
