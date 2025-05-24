@@ -1,4 +1,7 @@
 export interface Vehicle {
+	location: ReactNode;
+	updatedAt: string | number | Date;
+	createdAt: string | number | Date;
 	_id: string;
 	make: string;
 	model: string;
@@ -14,7 +17,21 @@ export interface Vehicle {
 	purchaseDate: string;
 	dailyUsage: number[];
 	weeklyUsage: number[];
-	maintenanceHistory?: Array<unknown>; //TODO: Define MaintenanceRecord type
+	maintenanceHistory?: Array<Maintenance>;
+}
+
+export interface Maintenance {
+	_id: string;
+	vehicle: string; // ObjectId as string
+	date: string | Date;
+	description: string;
+	cost: number;
+	mileage?: number;
+	serviceCenter?: string;
+	notes?: string;
+	nextDueDate?: string | Date;
+	createdAt: string | Date;
+	updatedAt: string | Date;
 }
 
 export type VehicleFormData = Omit<Vehicle, 'id' | 'dailyUsage' | 'weeklyUsage'>;

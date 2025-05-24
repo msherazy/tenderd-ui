@@ -19,7 +19,7 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 	return (
 		<div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden border border-gray-100 dark:border-gray-700">
 			{/* Header Section with more visual emphasis */}
-			<div className="bg-gray-50 dark:bg-gray-750 p-6 border-b border-gray-200 dark:border-gray-700">
+			<div className="bg-gray-50 dark:bg-gray-800 p-6 border-b border-gray-200 dark:border-gray-700">
 				<div className="flex justify-between items-start">
 					<div>
 						<h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center">
@@ -86,7 +86,7 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 const DetailsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-			<div className="bg-gray-50 dark:bg-gray-750 p-5 rounded-lg shadow-sm">
+			<div className="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-sm">
 				<h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
 					Basic Information
 				</h3>
@@ -99,7 +99,7 @@ const DetailsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 					/>
 				</div>
 			</div>
-			<div className="bg-gray-50 dark:bg-gray-750 p-5 rounded-lg shadow-sm">
+			<div className="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-sm">
 				<h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
 					Specifications
 				</h3>
@@ -123,7 +123,7 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 			<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
 				Maintenance History
 			</h3>
-			<div className="bg-gray-50 dark:bg-gray-750 p-5 rounded-lg shadow-sm">
+			<div className="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-sm">
 				<div className="flex items-center mb-4">
 					<div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3">
 						<svg
@@ -195,7 +195,7 @@ const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 			<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
 				Current Location
 			</h3>
-			<div className="bg-gray-50 dark:bg-gray-750 p-5 rounded-lg shadow-sm">
+			<div className="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-sm">
 				<div className="flex items-center mb-4">
 					<div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center mr-3">
 						<svg
@@ -237,10 +237,6 @@ const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 						referrerPolicy="no-referrer-when-downgrade"
 						title={`Map showing location of ${vehicle.make} ${vehicle.model}`}
 						className="w-full h-full"
-						onError={e => {
-							// Add error handling if needed
-							console.error('Map failed to load');
-						}}
 					></iframe>
 				</div>
 
@@ -277,7 +273,7 @@ const AnalyticsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 				Usage Analytics
 			</h3>
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-				<div className="bg-gray-50 dark:bg-gray-750 p-5 rounded-lg shadow-sm">
+				<div className="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-sm">
 					<h4 className="text-md font-medium text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
 						Daily Usage (miles)
 					</h4>
@@ -297,7 +293,7 @@ const AnalyticsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 						</div>
 					</div>
 				</div>
-				<div className="bg-gray-50 dark:bg-gray-750 p-5 rounded-lg shadow-sm">
+				<div className="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-sm">
 					<h4 className="text-md font-medium text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
 						Weekly Usage (miles)
 					</h4>
@@ -318,7 +314,7 @@ const AnalyticsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 					</div>
 				</div>
 			</div>
-			<div className="mt-6 bg-gray-50 dark:bg-gray-750 p-5 rounded-lg shadow-sm">
+			<div className="mt-6 bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-sm">
 				<h4 className="text-md font-medium text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
 					Fuel Efficiency
 				</h4>

@@ -31,7 +31,7 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
 
 			<form onSubmit={onFormSubmit} className="dark:bg-gray-800">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-					<div className="space-y-4 bg-gray-50 dark:bg-gray-750 p-5 rounded-lg shadow-sm">
+					<div className="space-y-4 bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-sm">
 						<h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
 							Vehicle Details
 						</h3>
@@ -61,7 +61,6 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
 							min="2000"
 							max={(new Date().getFullYear() + 1).toString()}
 							required
-							pattern="\\d{1,4}"
 						/>
 						<FormSelect
 							label="Type"
@@ -77,15 +76,9 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
 							]}
 							required={true}
 						/>
-						<FormInput
-							label="Color"
-							name="color"
-							value={formData.color}
-							onChange={onFormChange}
-							pattern="[A-Za-z ]*"
-						/>
+						<FormInput label="Color" name="color" value={formData.color} onChange={onFormChange} />
 					</div>
-					<div className="space-y-4 bg-gray-50 dark:bg-gray-750 p-5 rounded-lg shadow-sm">
+					<div className="space-y-4 bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-sm">
 						<h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
 							Additional Information
 						</h3>
@@ -96,7 +89,6 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
 							onChange={onFormChange}
 							error={formErrors.licensePlate}
 							required
-							pattern="[A-Za-z0-9 ]*"
 						/>
 						<FormInput
 							label="VIN"
@@ -104,10 +96,7 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
 							value={formData.vin}
 							onChange={onFormChange}
 							error={formErrors.vin}
-							maxLength={17}
-							minLength={17}
 							required
-							pattern="\\d{17}"
 						/>
 						<FormInput
 							label="Mileage"

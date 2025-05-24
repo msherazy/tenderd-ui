@@ -1,13 +1,8 @@
-import { useEffect } from 'react';
 import { useVehicleStore } from '../features/vehicleStore';
 import { Button } from '../components/Button';
 
 export default function VehicleListPage() {
-	const { vehicles, fetchVehicles, loading, error } = useVehicleStore();
-
-	useEffect(() => {
-		fetchVehicles();
-	}, [fetchVehicles]);
+	const { vehicles, loading, error } = useVehicleStore();
 
 	if (loading) return <div className="p-8">Loading vehicles...</div>;
 	if (error) return <div className="text-red-600">{error}</div>;
@@ -27,7 +22,7 @@ export default function VehicleListPage() {
 					>
 						<div className="font-bold text-lg mb-1 text-gray-900">
 							{vehicle.make} {vehicle.model}
-							<span className="text-gray-400 font-normal">({vehicle.year})</span>
+							<span className="text-gray-400 font-normal">{vehicle.year}</span>
 						</div>
 						<div className="text-xs text-gray-500 mb-2">VIN: {vehicle.vin}</div>
 						<div>
