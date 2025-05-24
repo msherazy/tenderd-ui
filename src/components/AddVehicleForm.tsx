@@ -58,6 +58,8 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
                             min="2000"
                             max={(new Date().getFullYear() + 1).toString()}
                             required
+                            maxLength={4}
+                            pattern="\\d{1,4}"
                         />
                         <FormSelect
                             label="Type"
@@ -78,6 +80,7 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
                             name="color"
                             value={formData.color}
                             onChange={onFormChange}
+                            pattern="[A-Za-z ]*"
                         />
                     </div>
                     <div className="space-y-4">
@@ -88,6 +91,7 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
                             onChange={onFormChange}
                             error={formErrors.licensePlate}
                             required
+                            pattern="[A-Za-z0-9 ]*"
                         />
                         <FormInput
                             label="VIN"
@@ -98,6 +102,7 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
                             maxLength={17}
                             minLength={17}
                             required
+                            pattern="\\d{17}"
                         />
                         <FormInput
                             label="Mileage"
@@ -132,7 +137,7 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
                                 { value: 'Hybrid', label: 'Hybrid' },
                             ]}
                         />
-                    </div>a
+                    </div>
                 </div>
                 <div className="mt-8">
                     <button

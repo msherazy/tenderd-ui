@@ -19,6 +19,7 @@ export function useCreateVehicle() {
             });
             
             if (!res.ok) {
+                console.error('Error response:', res);
                 const errorData = await res.json();
                 throw new Error(errorData.message || 'Failed to create vehicle');
             }
@@ -26,6 +27,7 @@ export function useCreateVehicle() {
             const data = await res.json();
             return data;
         } catch (err) {
+            console.error('Failed to create vehicle:', err);
             const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
             setError(errorMessage);
             throw err;
