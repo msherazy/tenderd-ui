@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Vehicle } from '../types';
 import api from '../services/api';
+import axios, { AxiosError } from 'axios';
 
 export function useCreateVehicle() {
     const [loading, setLoading] = useState(false);
@@ -10,10 +11,28 @@ export function useCreateVehicle() {
         setLoading(true);
         setError(null);
         try {
-            const res = await api.post('/vehicles', vehicle);
+            // Add default usage data if not provided
+            const vehicleWithUsageData = {
+                ...vehicle,
+                // Add mock usage data if not provided
+                dailyUsage: vehicle.dailyUsage || [10, 12, 8, 15, 9, 11, 7],
+                weeklyUsage: vehicle.weeklyUsage || [70, 65, 80, 75]
+            };
+
+            const res = await api.post('/vehicles', vehicleWithUsageData);
             return res.data;
-        } catch (err: any) {
-            const errorMessage = err?.response?.data?.message || err.message || 'Failed to create vehicle';
+        } catch (err: unknown) {
+            let errorMessage = 'Failed to create vehicle';
+
+            if (axios.isAxiosError(err)) {
+                // Handle Axios errors with proper typing
+                const axiosError = err as AxiosError;
+                errorMessage = axiosError.response?.data?.message || axiosError.message || errorMessage;
+            } else if (err instanceof Error) {
+                // Handle regular Error objects
+                errorMessage = err.message;
+            }
+
             setError(errorMessage);
             throw new Error(errorMessage);
         } finally {

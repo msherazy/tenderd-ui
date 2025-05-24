@@ -1,7 +1,7 @@
 import React from 'react';
 import type {Vehicle} from '../types';
 import { StatusBadge, VehicleTypeBadge } from './Badges';
-import { DetailRow } from './Card';
+import { DetailRow } from './Card/Card.tsx';
 
 interface VehicleDetailsProps {
     vehicle: Vehicle;

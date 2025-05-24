@@ -17,7 +17,6 @@ interface VehicleState {
     sortDirection: 'asc' | 'desc';
 
     // Actions
-    fetchVehicles: () => Promise<void>;
     selectVehicle: (vehicle: Vehicle) => void;
     setActiveTab: (tab: string) => void;
     clearSelectedVehicle: () => void;
@@ -25,7 +24,6 @@ interface VehicleState {
     updateFormData: (name: string, value: string | number) => void;
     resetFormData: () => void;
     validateForm: () => boolean;
-    submitVehicleForm: () => Promise<void>;
     setSearchTerm: (term: string) => void;
     setFilterType: (type: string) => void;
     setFilterStatus: (status: string) => void;
@@ -62,19 +60,6 @@ export const useVehicleStore = create<VehicleState>((set, get) => ({
     filterStatus: 'all',
     sortField: 'make',
     sortDirection: 'asc',
-
-    fetchVehicles: async () => {
-        set({ loading: true, error: null });
-        try {
-            // Mock API call - replace with actual API call
-            const response = await new Promise<Vehicle[]>(resolve =>
-                setTimeout(() => resolve([]), 500)
-            );
-            set({ vehicles: response, loading: false });
-        } catch (error) {
-            set({ error: (error as Error).message, loading: false });
-        }
-    },
 
     selectVehicle: (vehicle: Vehicle) => {
         set({ selectedVehicle: vehicle, activeTab: 'details' });
@@ -158,34 +143,5 @@ export const useVehicleStore = create<VehicleState>((set, get) => ({
         set(state => ({
             sortDirection: state.sortDirection === 'asc' ? 'desc' : 'asc'
         }));
-    },
-
-    submitVehicleForm: async () => {
-        const isValid = get().validateForm();
-        if (!isValid) return;
-
-        set({ loading: true, error: null });
-        try {
-            const { formData } = get();
-            // Mock API call - replace with actual API call
-            await new Promise(resolve => setTimeout(resolve, 500));
-
-            // Generate a mock ID for the new vehicle
-            const newVehicle: Vehicle = {
-                ...formData,
-                id: `v-${Date.now()}`,
-                dailyUsage: [10, 12, 8, 15, 9, 11, 7],   // mock data
-                weeklyUsage: [70, 65, 80, 75]
-            };
-
-            set(state => ({
-                vehicles: [...state.vehicles, newVehicle],
-                loading: false,
-                showAddForm: false
-            }));
-            get().resetFormData();
-        } catch (error) {
-            set({ error: (error as Error).message, loading: false });
-        }
     }
 }));

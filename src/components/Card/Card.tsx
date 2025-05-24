@@ -1,5 +1,5 @@
 import React from 'react';
-import { useVehicleStore } from '../features/vehicleStore';
+import { useVehicleStore } from '../../features/vehicleStore.ts';
 
 export const LoadingSpinner = () => {
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import type {Vehicle} from '../types';
 import { StatusBadge, VehicleTypeBadge } from './Badges.tsx';
-import { LoadingSpinner, ErrorMessage, EmptyState } from './Card.tsx';
+import { LoadingSpinner, ErrorMessage, EmptyState } from './Card/Card.tsx';
 
 interface VehicleListProps {
     vehicles: Vehicle[];
