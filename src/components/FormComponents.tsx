@@ -101,7 +101,7 @@ export const FormSelect = ({
                 id={name}
                 value={value}
                 onChange={onChange}
-                className={`${inputBaseStyles} ${error ? inputErrorStyles : ''}`}
+                className={`${inputBaseStyles} px-3 py-2 ${error ? inputErrorStyles : ''}`}
             >
                 {options.map((option) => (
                     <option key={option.value} value={option.value}>

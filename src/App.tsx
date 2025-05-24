@@ -116,7 +116,7 @@ const App = () => {
         <div className="flex flex-col min-h-screen">
             <Header onThemeToggle={toggleDarkMode} isDarkMode={isDarkMode} />
             <main className={`flex-grow ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-50'}`}>
-                <div className="container mx-auto px-4 py-8">
+                <div className="max-w-[1440px] mx-auto px-4 py-8">
                     <>
                         {toast && <Toast message={toast} onClose={() => setToast(null)} />}
                         {!selectedVehicle && !showAddForm && (
