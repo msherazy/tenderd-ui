@@ -19,18 +19,6 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 }) => {
 	return (
 		<div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 border border-gray-100 dark:border-gray-700">
-			<div className="flex justify-between items-start mb-6">
-				<h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-					Add Maintenance Entry
-				</h2>
-				<button
-					onClick={onCancel}
-					className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-				>
-					Cancel
-				</button>
-			</div>
-
 			<form onSubmit={onFormSubmit} className="dark:bg-gray-800">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 					{/* Maintenance Details Section */}

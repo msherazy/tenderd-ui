@@ -132,7 +132,7 @@ const App = () => {
 											value={filterType}
 											onChange={e => setFilterType(e.target.value)}
 											options={[
-												{ value: 'all', label: 'All Types' },
+												{ value: 'all', label: 'Vehicle Types' },
 												{ value: 'Sedan', label: 'Sedan' },
 												{ value: 'SUV', label: 'SUV' },
 												{ value: 'Truck', label: 'Truck' },
@@ -147,7 +147,7 @@ const App = () => {
 											value={filterStatus}
 											onChange={e => setFilterStatus(e.target.value)}
 											options={[
-												{ value: 'all', label: 'All Statuses' },
+												{ value: 'all', label: 'Statuses' },
 												{ value: 'Active', label: 'Active' },
 												{ value: 'Maintenance', label: 'Maintenance' },
 												{ value: 'Inactive', label: 'Inactive' },

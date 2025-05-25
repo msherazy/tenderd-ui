@@ -25,7 +25,6 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 				<div>
 					<h2 className="text-2xl font-bold text-gray-900 flex items-center">
 						{vehicle.make} {vehicle.model}
-						{vehicle.status && <StatusBadge status={vehicle.status} className="ml-3" />}
 					</h2>
 					<p className="text-gray-600 mt-1 text-lg">
 						{vehicle.year}
@@ -174,6 +173,14 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 		setFormErrors({});
 	};
 
+	const toggleShowForm = () => {
+		if (showForm) {
+			handleCancel();
+		} else {
+			setShowForm(true);
+		}
+	}
+
 	return (
 		<div>
 			<div className="flex justify-between items-center mb-4">
@@ -181,10 +188,14 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 					Maintenance History
 				</h3>
 				<button
-					onClick={() => setShowForm(true)}
-					className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+					onClick={toggleShowForm}
+					className={`px-4 py-2 rounded-md transition-colors ${
+						showForm
+							? 'bg-red-500 hover:bg-red-600 text-white'
+							: 'bg-indigo-600 hover:bg-indigo-700 text-white'
+					}`}
 				>
-					Add Maintenance
+					{showForm ? 'Cancel' : 'Add Maintenance'}
 				</button>
 			</div>
 
