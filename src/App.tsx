@@ -1,8 +1,8 @@
 import './index.css';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet } from '@tanstack/react-router';
-import { Header } from './components/Header.tsx';
-import { Footer } from './components/Footer.tsx';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
 import { Index } from './components/Toast';
 
 const App = () => {

@@ -25,6 +25,7 @@ export const FormInput = ({
 	max,
 	placeholder,
 	noLabel = false,
+	onBlur,
 	'data-testid': testId, // Add data-testid prop
 	...rest // Rest of props
 }: {
@@ -41,6 +42,7 @@ export const FormInput = ({
 	noLabel?: boolean;
 	'data-testid'?: string; // Add type for data-testid
 	[key: string]: any; // Allow additional props
+	onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }) => {
 	const inputId = `input-${name}`;
 
