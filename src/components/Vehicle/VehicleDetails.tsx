@@ -164,7 +164,7 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		const newEntry = await mutateAsync(formData);
-		console.log('Maintenance added :', newEntry)
+		console.log('Maintenance added :', newEntry);
 		setShowForm(false);
 	};
 

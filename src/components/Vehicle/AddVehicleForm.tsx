@@ -6,7 +6,9 @@ import { Index } from '../Button';
 interface AddVehicleFormProps {
 	formData: VehicleFormData;
 	formErrors: Record<string, string>;
-	onFormChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
+	onFormChange: (
+		e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+	) => void;
 	onFormSubmit: (e: React.FormEvent) => void;
 	onCancel: () => void;
 }

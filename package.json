@@ -10,7 +10,11 @@
 		"preview": "vite preview",
 		"prettier": "prettier --write .",
 		"test": "jest",
-		"test:watch": "jest --watch"
+		"test:watch": "jest --watch",
+		"docker:build": "docker-compose build",
+		"docker:up": "docker-compose up -d",
+		"docker:down": "docker-compose down",
+		"docker:restart": "docker-compose restart"
 	},
 	"dependencies": {
 		"@tailwindcss/vite": "^4.1.7",
