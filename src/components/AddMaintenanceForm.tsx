@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import type { MaintenanceFormData } from '../types';
 import { FormInput } from './FormComponents';
 import { Button } from './Button';
+import { t } from '../utils/locale';
 
 interface AddMaintenanceFormProps {
 	formData: MaintenanceFormData;
@@ -26,15 +27,15 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 		// Update local errors state
 		setFormErrors(prev => ({
 			...prev,
-			[field]: message
+			[field]: message,
 		}));
 
-		 // Simulate a change event to update parent component's state
+		// Simulate a change event to update parent component's state
 		const simulatedEvent = {
 			target: {
 				name: field,
-				value: formData[field as keyof MaintenanceFormData] || ''
-			}
+				value: formData[field as keyof MaintenanceFormData] || '',
+			},
 		} as React.ChangeEvent<HTMLInputElement>;
 		onFormChange(simulatedEvent);
 	};
@@ -48,7 +49,7 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 	const validateField = (field: keyof MaintenanceFormData) => {
 		const errors: Record<string, string> = {};
 
-		switch(field) {
+		switch (field) {
 			case 'mileage':
 				if (formData.mileage !== undefined && formData.mileage !== null) {
 					if (formData.mileage < 0) {
@@ -114,7 +115,7 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 			errors.cost = 'Cost seems unusually high. Please verify.';
 		}
 
-		 // Mileage validation
+		// Mileage validation
 		if (formData.mileage === undefined || formData.mileage === null) {
 			errors.mileage = 'Mileage is required';
 		} else if (formData.mileage < 0) {
@@ -207,7 +208,7 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 
 					{/* Additional Information Section */}
 					<div className="space-y-4 bg-gray-50 p-5 rounded-lg shadow-sm">
-						<h3 className="text-lg font-medium text-dark mb-4 border-b border-gray-200 pb-2">
+						<h3 className="text-lg font-medium mb-4 border-b border-gray-200 pb-2">
 							Additional Information
 						</h3>
 						<FormInput
@@ -251,18 +252,11 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 				</div>
 
 				<div className="mt-8 flex justify-end space-x-3">
-					<Button
-						type="button"
-						variant="secondary"
-						onClick={onCancel}
-					>
-						Cancel
+					<Button type="button" variant="secondary" onClick={onCancel}>
+						{t('CANCEL')}
 					</Button>
-					<Button
-						type="submit"
-						variant="primary"
-					>
-						Submit
+					<Button type="submit" variant="primary">
+						{t('SUBMIT')}
 					</Button>
 				</div>
 			</form>

@@ -24,7 +24,7 @@ export interface Vehicle {
 
 export interface Maintenance {
 	_id: string;
-	vehicle: string; // ObjectId as string
+	vehicle: string;
 	date: string | Date;
 	description: string;
 	cost: number;

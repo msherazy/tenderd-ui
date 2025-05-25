@@ -2,7 +2,8 @@ import React from 'react';
 import type { Vehicle } from '../types';
 import { StatusBadge, VehicleTypeBadge } from './Badges.tsx';
 import { EmptyState, ErrorMessage, LoadingSpinner } from './Card/Card.tsx';
-import {Button} from "./Button.tsx";
+import { Button } from './Button.tsx';
+import { t } from '../utils/locale';
 
 interface VehicleListProps {
 	vehicles: Vehicle[];
@@ -74,19 +75,12 @@ export const VehicleList: React.FC<VehicleListProps> = ({
 				</thead>
 				<tbody className="bg-white divide-y divide-gray-200">
 					{vehicles?.map(vehicle => (
-						<tr
-							key={vehicle._id}
-							className="hover:bg-gray-50 transition-colors"
-						>
+						<tr key={vehicle._id} className="hover:bg-gray-50 transition-colors">
 							<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
 								{vehicle.make}
 							</td>
-							<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-								{vehicle.model}
-							</td>
-							<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-								{vehicle.year}
-							</td>
+							<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{vehicle.model}</td>
+							<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{vehicle.year}</td>
 							<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
 								<VehicleTypeBadge type={vehicle.type} />
 							</td>
@@ -94,11 +88,8 @@ export const VehicleList: React.FC<VehicleListProps> = ({
 								<StatusBadge status={vehicle.status} />
 							</td>
 							<td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-								<Button
-									variant="primary"
-									onClick={() => onVehicleSelect(vehicle)}
-								>
-									View Details
+								<Button variant="primary" onClick={() => onVehicleSelect(vehicle)}>
+									{t('VIEW_DETAILS')}
 								</Button>
 							</td>
 						</tr>

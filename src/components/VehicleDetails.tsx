@@ -5,6 +5,7 @@ import { DetailRow } from './Card/Card.tsx';
 import { AddMaintenanceForm } from './AddMaintenanceForm';
 import { useCreateMaintenance } from '../hooks';
 import { Button } from './Button';
+import { t } from '../utils/locale';
 import {
 	BarChart,
 	Bar,
@@ -17,7 +18,7 @@ import {
 	LineChart,
 	Line,
 	AreaChart,
-	Area
+	Area,
 } from 'recharts';
 
 interface VehicleDetailsProps {
@@ -51,11 +52,7 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 						)}
 					</p>
 				</div>
-				<Button
-					variant="secondary"
-					onClick={onBack}
-					className="shadow-sm flex items-center"
-				>
+				<Button variant="secondary" onClick={onBack} className="shadow-sm flex items-center">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						className="h-4 w-4 mr-1"
@@ -70,8 +67,8 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 							d="M10 19l-7-7m0 0l7-7m-7 7h18"
 						/>
 					</svg>
-					Back to List
-					</Button>
+					{t('BACK_TO_LIST')}
+				</Button>
 			</div>
 		</div>
 
@@ -195,20 +192,18 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 		} else {
 			setShowForm(true);
 		}
-	}
+	};
 
 	return (
 		<div>
 			<div className="flex justify-between items-center mb-4">
-				<h3 className="text-lg font-semibold text-gray-900">
-					Maintenance History
-				</h3>
+				<h3 className="text-lg font-semibold text-gray-900">{t('MAINTENANCE_HISTORY')}</h3>
 				<Button
 					onClick={toggleShowForm}
 					variant={showForm ? 'danger' : 'primary'}
 					isLoading={loading}
 				>
-					{showForm ? 'Cancel' : 'Add Maintenance'}
+					{showForm ? t('CANCEL') : t('MAINTENANCE_ADD')}
 				</Button>
 			</div>
 
@@ -239,7 +234,7 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 						))}
 					</ul>
 				) : (
-					<p className="text-gray-600">No maintenance records available.</p>
+					<p className="text-gray-600">{t('MAINTENANCE_NONE')}</p>
 				)}
 			</div>
 		</div>
@@ -254,16 +249,13 @@ const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 
 	return (
 		<div>
-			<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-				Current Location
-			</h3>
-			<div className="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-sm">
+			<h3 className="text-lg font-semibold text-gray-900  mb-4">Current Location</h3>
+			<div className="bg-gray-50  p-5 rounded-lg shadow-sm">
 				<div className="flex items-center mb-4">
-					<div
-						className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center mr-3">
+					<div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-3">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							className="h-5 w-5 text-red-600 dark:text-red-300"
+							className="h-5 w-5 text-red-600 "
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"
@@ -282,19 +274,19 @@ const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 							/>
 						</svg>
 					</div>
-					<p className="text-gray-700 dark:text-gray-300">
+					<p className="text-gray-700 ">
 						<span className="font-medium">Current Location:</span>{' '}
-						<span className="text-gray-900 dark:text-white">{vehicle?.location}</span>
+						<span className="text-gray-900 ">{vehicle?.location}</span>
 					</p>
 				</div>
 
-				<div className="bg-gray-200 dark:bg-gray-700 rounded-md overflow-hidden h-96">
+				<div className="bg-gray-200  rounded-md overflow-hidden h-96">
 					{/* Google Maps Embed iframe */}
 					<iframe
 						src={originalEmbedUrl}
 						width="100%"
 						height="100%"
-						style={{border: 0}}
+						style={{ border: 0 }}
 						allowFullScreen={true}
 						loading="lazy"
 						referrerPolicy="no-referrer-when-downgrade"
@@ -303,23 +295,20 @@ const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 					></iframe>
 				</div>
 
-				<div className="mt-6 border-t border-gray-200 dark:border-gray-700 pt-4">
-					<h4 className="text-md font-medium text-gray-900 dark:text-white mb-3">
-						Location History
-					</h4>
+				<div className="mt-6 border-t border-gray-200  pt-4">
+					<h4 className="text-md font-medium text-gray-900  mb-3">Location History</h4>
 					<ul className="space-y-2">
 						{[
-							{location: 'Main Office', time: 'Current'},
-							{location: 'Main Office', time: 'Yesterday'},
-							{location: 'Field Site #3', time: '2 days ago'},
+							{ location: 'Main Office', time: 'Current' },
+							{ location: 'Main Office', time: 'Yesterday' },
+							{ location: 'Field Site #3', time: '2 days ago' },
 						].map((item, index) => (
 							<li
 								key={index}
-								className="flex items-center text-sm text-gray-600 dark:text-gray-300 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+								className="flex items-center text-sm text-gray-600  p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
 							>
 								<div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-								{item.location} -{' '}
-								<span className="ml-1 text-gray-500 dark:text-gray-400">{item.time}</span>
+								{item.location} - <span className="ml-1 text-gray-500 0">{item.time}</span>
 							</li>
 						))}
 					</ul>
@@ -327,7 +316,7 @@ const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 			</div>
 		</div>
 	);
-}
+};
 
 // Analytics Tab
 const AnalyticsTab = () => {
@@ -341,21 +330,21 @@ const AnalyticsTab = () => {
 		{ name: 'Wed', hours: 15, fuel: 48 },
 		{ name: 'Thu', hours: 9, fuel: 40 },
 		{ name: 'Fri', hours: 11, fuel: 43 },
-		{ name: 'Sat', hours: 7, fuel: 36 }
+		{ name: 'Sat', hours: 7, fuel: 36 },
 	];
 
 	const monthlyData = [
 		{ name: 'Jan', maintenance: 1200, hours: 160, efficiency: 8.2 },
 		{ name: 'Feb', maintenance: 800, hours: 180, efficiency: 8.5 },
 		{ name: 'Mar', maintenance: 1500, hours: 150, efficiency: 7.8 },
-		{ name: 'Apr', maintenance: 600, hours: 190, efficiency: 8.7 }
+		{ name: 'Apr', maintenance: 600, hours: 190, efficiency: 8.7 },
 	];
 
 	const metrics = {
 		avgDailyHours: 10.5,
 		totalDistance: '12,500 km',
 		fuelEfficiency: '8.5 km/L',
-		costPerKm: '$0.85'
+		costPerKm: '$0.85',
 	};
 
 	return (
@@ -372,7 +361,7 @@ const AnalyticsTab = () => {
 				))}
 			</div>
 
-			 {/* Combined Usage Chart with Toggle */}
+			{/* Combined Usage Chart with Toggle */}
 			<div className="bg-gray-50 p-5 rounded-lg shadow-sm">
 				<div className="flex justify-between items-center mb-4">
 					<h3 className="text-base md:text-lg font-medium text-gray-900">

@@ -10,7 +10,7 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { VehicleList } from './components/VehicleList.tsx';
 import { Toast } from './components/Toast';
-import {Button} from "./components/Button.tsx";
+import { Button } from './components/Button.tsx';
 
 const App = () => {
 	const { vehicles, loading, error } = useVehicles();
@@ -156,11 +156,7 @@ const App = () => {
 											]}
 											noLabel
 										/>
-										<Button
-											variant="primary"
-											fullWidth
-											onClick={() => toggleAddForm(true)}
-										>
+										<Button variant="primary" fullWidth onClick={() => toggleAddForm(true)}>
 											Add Vehicle
 										</Button>
 									</div>

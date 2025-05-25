@@ -16,8 +16,8 @@
 
 	/* Effects */
 	--table-row-hover: rgba(232, 130, 71, 0.1); /* Based on primary color */
-	--card-shadow: 6px 5px 7px 0 rgba(220, 226, 238, .69);
-	--border-color: rgba(220, 226, 238, .71);
+	--card-shadow: 6px 5px 7px 0 rgba(220, 226, 238, 0.69);
+	--border-color: rgba(220, 226, 238, 0.71);
 	--heading-color: var(--color-dark);
 }
 
@@ -56,4 +56,55 @@ summary,
 .table-row-clickable,
 .icon-button {
 	cursor: pointer;
+}
+
+.icon-button {
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px;
+	border-radius: 50%;
+	transition: background-color 0.2s;
+	color: var(--text-primary);
+}
+
+.icon-button:hover {
+	background-color: var(--table-row-hover);
+}
+
+.icon-button.primary {
+	color: #3182ce; /* Keep a consistent blue color across themes */
+}
+
+.icon-button.danger {
+	color: #e53e3e; /* Keep a consistent red color across themes */
+}
+
+.card {
+	background-color: var(--background-primary);
+	color: var(--text-primary);
+	border: 1px solid var(--border-color);
+}
+
+.card .card-title {
+	color: var(--heading-color);
+}
+
+.card .card-subtitle {
+	color: var(--text-secondary);
+}
+
+.card.interactive,
+.card[onClick] {
+	cursor: pointer;
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.card.interactive:hover,
+.card[onClick]:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px var(--card-shadow);
 }

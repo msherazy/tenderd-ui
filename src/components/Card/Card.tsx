@@ -1,25 +1,22 @@
 import React from 'react';
 import { useVehicleStore } from '../../features/vehicleStore.ts';
-import { Button } from '../Button'; // Import the Button component
+import { Button } from '../Button';
+import { t } from '../../utils/locale';
 
 export const LoadingSpinner = () => {
 	return (
 		<div className="flex justify-center items-center py-12">
-			<div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500 dark:border-indigo-400"></div>
+			<div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
 		</div>
 	);
 };
 
 export const ErrorMessage = ({ message }: { message: string }) => {
 	return (
-		<div className="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-400 p-4 my-6">
+		<div className="bg-red-50 border-l-4 border-red-500 p-4 my-6">
 			<div className="flex">
 				<div className="flex-shrink-0">
-					<svg
-						className="h-5 w-5 text-red-500 dark:text-red-400"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-					>
+					<svg className="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
 						<path
 							fillRule="evenodd"
 							d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
@@ -28,7 +25,7 @@ export const ErrorMessage = ({ message }: { message: string }) => {
 					</svg>
 				</div>
 				<div className="ml-3">
-					<p className="text-sm text-red-700 dark:text-red-400">{message}</p>
+					<p className="text-sm text-red-700">{message}</p>
 				</div>
 			</div>
 		</div>
@@ -40,7 +37,7 @@ export const EmptyState = () => {
 	return (
 		<div className="text-center py-12">
 			<svg
-				className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500"
+				className="mx-auto h-12 w-12 text-gray-400"
 				fill="none"
 				viewBox="0 0 24 24"
 				stroke="currentColor"
@@ -54,10 +51,8 @@ export const EmptyState = () => {
 					d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
 				/>
 			</svg>
-			<h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-white">No vehicles found</h3>
-			<p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-				Try adjusting your search or filter to find what you're looking for.
-			</p>
+			<h3 className="mt-2 text-sm font-medium text-gray-900">{t('VEHICLE_NONE_FOUND')}</h3>
+			<p className="mt-1 text-sm text-gray-500">{t('VEHICLE_SEARCH_ADJUST')}</p>
 			<div className="mt-6">
 				<Button
 					variant="primary"
@@ -78,8 +73,8 @@ export const EmptyState = () => {
 							clipRule="evenodd"
 						/>
 					</svg>
-					Add Vehicle
-				 </Button>
+					{t('VEHICLE_ADD')}
+				</Button>
 			</div>
 		</div>
 	);
@@ -88,8 +83,8 @@ export const EmptyState = () => {
 export const DetailRow = ({ label, value }: { label: string; value: React.ReactNode }) => {
 	return (
 		<div className="grid grid-cols-3 gap-4">
-			<dt className="text-sm font-medium text-gray-500 dark:text-gray-400">{label}</dt>
-			<dd className="col-span-2 text-sm text-gray-900 dark:text-white">{value}</dd>
+			<dt className="text-sm font-medium text-gray-500">{label}</dt>
+			<dd className="col-span-2 text-sm text-gray-900">{value}</dd>
 		</div>
 	);
 };

@@ -1,3 +1,5 @@
+import { t } from '../utils/locale';
+
 export const Header = () => {
 	return (
 		<header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
@@ -11,7 +13,7 @@ export const Header = () => {
 							style={{ height: '2rem', width: 'auto' }}
 						/>
 						<div className="hidden sm:flex items-center px-3 py-0.5 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">
-							Fleet Management Dashboard
+							{t('APP_TITLE')}
 						</div>
 					</div>
 				</div>
