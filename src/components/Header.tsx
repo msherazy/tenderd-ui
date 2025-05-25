@@ -1,4 +1,4 @@
-import { t } from '../utils/locale.ts';
+import { t } from '../utils/locale';
 
 export const Header = () => {
 	return (

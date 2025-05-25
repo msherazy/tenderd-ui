@@ -8,7 +8,7 @@ import { EN_US, LOCALE_KEYS } from '../constants';
  */
 export function t(key: keyof typeof LOCALE_KEYS, params?: Record<string, string | number>): string {
 	// Get the translation key
-	const localeKey = LOCALE_KEYS[key];
+	const localeKey = LOCALE_KEYS[key] as keyof typeof EN_US;
 
 	// Get the translated string from the English locale (could be extended later)
 	let translatedString = EN_US[localeKey] || localeKey;
