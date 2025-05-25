@@ -99,7 +99,7 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 			{activeTab === 'details' && <DetailsTab vehicle={vehicle} />}
 			{activeTab === 'maintenance' && <MaintenanceTab vehicle={vehicle} />}
 			{activeTab === 'location' && <LocationTab vehicle={vehicle} />}
-			{activeTab === 'analytics' && <AnalyticsTab vehicle={vehicle} />}
+			{activeTab === 'analytics' && <AnalyticsTab />} {/*we are mocking the data in this tab*/}
 		</div>
 	</div>
 );
@@ -247,21 +247,90 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 };
 
 // Location Tab
-const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => (
-	<div>
-		<h3 className="text-lg font-semibold text-gray-900 mb-4">Location</h3>
-		<div className="bg-gray-50 p-5 rounded-lg shadow-sm">
-			{vehicle.location ? (
-				<p className="text-gray-700">{vehicle.location}</p>
-			) : (
-				<p className="text-gray-600">No location data.</p>
-			)}
+const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
+	// Use the original embed if you want to keep the Tenderd office marker
+	const originalEmbedUrl =
+		'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115638.89114074553!2d54.98881503695701!3d25.077635277788172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6d39dfcc406f%3A0xc2dd0ddf6fbc0db5!2sTenderd%20-%20AI%20Powered%20Fleet%20Management%20Platform!5e0!3m2!1sen!2s!4v1747986284897!5m2!1sen!2s';
+
+	return (
+		<div>
+			<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+				Current Location
+			</h3>
+			<div className="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-sm">
+				<div className="flex items-center mb-4">
+					<div
+						className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center mr-3">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="h-5 w-5 text-red-600 dark:text-red-300"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={2}
+								d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+							/>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={2}
+								d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+							/>
+						</svg>
+					</div>
+					<p className="text-gray-700 dark:text-gray-300">
+						<span className="font-medium">Current Location:</span>{' '}
+						<span className="text-gray-900 dark:text-white">{vehicle?.location}</span>
+					</p>
+				</div>
+
+				<div className="bg-gray-200 dark:bg-gray-700 rounded-md overflow-hidden h-96">
+					{/* Google Maps Embed iframe */}
+					<iframe
+						src={originalEmbedUrl}
+						width="100%"
+						height="100%"
+						style={{border: 0}}
+						allowFullScreen={true}
+						loading="lazy"
+						referrerPolicy="no-referrer-when-downgrade"
+						title={`Map showing location of ${vehicle.make} ${vehicle.model}`}
+						className="w-full h-full"
+					></iframe>
+				</div>
+
+				<div className="mt-6 border-t border-gray-200 dark:border-gray-700 pt-4">
+					<h4 className="text-md font-medium text-gray-900 dark:text-white mb-3">
+						Location History
+					</h4>
+					<ul className="space-y-2">
+						{[
+							{location: 'Main Office', time: 'Current'},
+							{location: 'Main Office', time: 'Yesterday'},
+							{location: 'Field Site #3', time: '2 days ago'},
+						].map((item, index) => (
+							<li
+								key={index}
+								className="flex items-center text-sm text-gray-600 dark:text-gray-300 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+							>
+								<div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
+								{item.location} -{' '}
+								<span className="ml-1 text-gray-500 dark:text-gray-400">{item.time}</span>
+							</li>
+						))}
+					</ul>
+				</div>
+			</div>
 		</div>
-	</div>
-);
+	);
+}
 
 // Analytics Tab
-const AnalyticsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
+const AnalyticsTab = () => {
 	const [viewMode, setViewMode] = useState<'daily' | 'monthly'>('daily');
 
 	// Mock analytics data with a consistent structure for charts
