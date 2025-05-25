@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { MaintenanceFormData, Vehicle } from '../types';
 import { StatusBadge, VehicleTypeBadge } from './Badges';
-import { DetailRow } from './Card/Card.tsx';
+import { DetailRow } from './Card.tsx';
 import { AddMaintenanceForm } from './AddMaintenanceForm';
 import { useCreateMaintenance } from '../hooks';
 import { Button } from './Button';
@@ -151,7 +151,7 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 	});
 	const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
-	const { mutateAsync, loading } = useCreateMaintenance(vehicle._id);
+	const { loading } = useCreateMaintenance(vehicle._id);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value, type } = e.target;

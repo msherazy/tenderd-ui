@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from '@tanstack/react-router';
 import { useVehicleDetails } from '../hooks';
 import { VehicleDetails } from '../components/VehicleDetails';
-import { LoadingSpinner, ErrorMessage } from '../components/Card/Card';
+import { LoadingSpinner, ErrorMessage } from '../components/Card.tsx';
+import { vehicleDetailsRoute } from '../router';
 
 interface VehicleDetailsPageProps {
   setToast: (message: string | null) => void;
 }
 
 const VehicleDetailsPage: React.FC<VehicleDetailsPageProps> = ({ setToast }) => {
-  const { vehicleId } = useParams<{ vehicleId: string }>();
+  const { vehicleId } = useParams({ from: vehicleDetailsRoute.id });
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('details');
 
@@ -20,12 +21,12 @@ const VehicleDetailsPage: React.FC<VehicleDetailsPageProps> = ({ setToast }) => 
     if (error) {
       setToast(error);
       // If there's an error fetching the vehicle, navigate back to the listing page
-      navigate('/');
+      navigate({ to: '/' });
     }
   }, [error, navigate, setToast]);
 
   const handleBack = () => {
-    navigate('/');
+    navigate({ to: '/' });
   };
 
   if (loading) return <LoadingSpinner />;

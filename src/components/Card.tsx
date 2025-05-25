@@ -1,7 +1,7 @@
 import React from 'react';
-import { useVehicleStore } from '../../features/vehicleStore.ts';
-import { Button } from '../Button';
-import { t } from '../../utils/locale';
+import { useVehicleStore } from '../features/vehicleStore.ts';
+import { Button } from './Button.tsx';
+import { t } from '../utils/locale.ts';
 
 export const LoadingSpinner = () => {
 	return (

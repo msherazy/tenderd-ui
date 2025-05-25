@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Vehicle } from '../types';
 import { StatusBadge, VehicleTypeBadge } from './Badges.tsx';
-import { EmptyState, ErrorMessage, LoadingSpinner } from './Card/Card.tsx';
+import { EmptyState, ErrorMessage, LoadingSpinner } from './Card.tsx';
 import { Button } from './Button.tsx';
 import { t } from '../utils/locale';
 

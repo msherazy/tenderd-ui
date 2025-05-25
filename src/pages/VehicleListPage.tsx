@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@tanstack/react-router';
 import { useVehicleStore } from '../features/vehicleStore';
 import { FormSelect, SearchInput } from '../components/FormComponents';
 import { useVehicles, useCreateVehicle } from '../hooks';
 import { VehicleList } from '../components/VehicleList';
 import { AddVehicleForm } from '../components/AddVehicleForm';
 import { Button } from '../components/Button';
+import type { Vehicle } from '../types';
 
 interface VehicleListPageProps {
   setToast: (message: string | null) => void;
@@ -43,10 +44,10 @@ const VehicleListPage: React.FC<VehicleListPageProps> = ({ setToast }) => {
   } = useVehicleStore();
 
   // Navigate to vehicle details when a vehicle is selected
-  const handleVehicleSelect = (vehicle: any) => {
+  const handleVehicleSelect = (vehicle: Vehicle) => {
     // Ensure vehicle._id exists
     if (vehicle && vehicle._id) {
-      navigate(`/vehicles/${vehicle._id}`);
+      navigate({ to: '/vehicles/$vehicleId', params: { vehicleId: vehicle._id } });
     }
   };
 
