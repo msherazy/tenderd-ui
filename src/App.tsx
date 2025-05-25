@@ -10,6 +10,7 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { VehicleList } from './components/VehicleList.tsx';
 import { Toast } from './components/Toast';
+import {Button} from "./components/Button.tsx";
 
 const App = () => {
 	const { vehicles, loading, error } = useVehicles();
@@ -115,16 +116,17 @@ const App = () => {
 									</div>
 									<div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto items-center sm:items-end">
 										{(filterType !== 'all' || filterStatus !== 'all' || searchTerm) && (
-											<button
+											<Button
+												type="submit"
+												variant="primary"
 												onClick={() => {
 													setFilterType('all');
 													setFilterStatus('all');
 													setSearchTerm('');
 												}}
-												className="w-full text-sm text-indigo-600 hover:underline mt-2 sm:mt-0"
 											>
 												Clear
-											</button>
+											</Button>
 										)}
 										<FormSelect
 											label="Filter by Type"
@@ -154,12 +156,13 @@ const App = () => {
 											]}
 											noLabel
 										/>
-										<button
+										<Button
+											variant="primary"
+											fullWidth
 											onClick={() => toggleAddForm(true)}
-											className="w-full px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
 										>
 											Add Vehicle
-										</button>
+										</Button>
 									</div>
 								</div>
 								<VehicleList

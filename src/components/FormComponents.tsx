@@ -1,7 +1,5 @@
-// Form components for the vehicle dashboard
 import React from 'react';
 
-// Define consistent input styles to reuse across all form components
 const inputBaseStyles = `
   block w-full rounded-md shadow-sm px-3 py-2
   border-gray-300 focus:ring-indigo-500 focus:border-indigo-500

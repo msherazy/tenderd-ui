@@ -2,6 +2,7 @@ import React from 'react';
 import type { Vehicle } from '../types';
 import { StatusBadge, VehicleTypeBadge } from './Badges.tsx';
 import { EmptyState, ErrorMessage, LoadingSpinner } from './Card/Card.tsx';
+import {Button} from "./Button.tsx";
 
 interface VehicleListProps {
 	vehicles: Vehicle[];
@@ -93,12 +94,12 @@ export const VehicleList: React.FC<VehicleListProps> = ({
 								<StatusBadge status={vehicle.status} />
 							</td>
 							<td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-								<button
+								<Button
+									variant="primary"
 									onClick={() => onVehicleSelect(vehicle)}
-									className="text-indigo-600 hover:text-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded px-2 py-1"
 								>
 									View Details
-								</button>
+								</Button>
 							</td>
 						</tr>
 					))}

@@ -12,7 +12,7 @@ export default function VehicleListPage() {
 		<div className="p-8 min-h-screen bg-gray-100">
 			<div className="flex justify-between items-center mb-6">
 				<h1 className="text-3xl font-extrabold text-gray-900">Fleet Vehicles</h1>
-				<Button>Add Vehicle</Button>
+				<Button variant={'primary'} fullWidth>Add Vehicle</Button>
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
 				{vehicles.map(vehicle => (

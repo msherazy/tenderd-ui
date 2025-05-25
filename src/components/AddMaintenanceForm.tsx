@@ -1,6 +1,7 @@
 import React from 'react';
 import type { MaintenanceFormData } from '../types';
 import { FormInput } from './FormComponents';
+import { Button } from './Button';
 
 interface AddMaintenanceFormProps {
 	formData: MaintenanceFormData;
@@ -15,7 +16,6 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 	formErrors,
 	onFormChange,
 	onFormSubmit,
-	onCancel,
 }) => {
 	return (
 		<div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 border border-gray-100 dark:border-gray-700">
@@ -97,13 +97,13 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 					</div>
 				</div>
 
-				<div className="mt-8">
-					<button
+				<div className="mt-8 flex justify-start space-x-3"> {/* Added flex and space for multiple buttons */}
+					<Button
 						type="submit"
-						className="w-full md:w-auto px-6 py-3 bg-indigo-600 dark:bg-indigo-500 text-white font-medium rounded-md hover:bg-indigo-700 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+						variant="primary"
 					>
 						Add Maintenance
-					</button>
+					</Button>
 				</div>
 			</form>
 		</div>

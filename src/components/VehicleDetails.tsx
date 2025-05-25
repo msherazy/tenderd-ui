@@ -4,6 +4,7 @@ import { StatusBadge, VehicleTypeBadge } from './Badges';
 import { DetailRow } from './Card/Card.tsx';
 import { AddMaintenanceForm } from './AddMaintenanceForm';
 import { useCreateMaintenance } from '../hooks';
+import { Button } from './Button';
 
 interface VehicleDetailsProps {
 	vehicle: Vehicle;
@@ -36,9 +37,10 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 						)}
 					</p>
 				</div>
-				<button
+				<Button
+					variant="secondary"
 					onClick={onBack}
-					className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors shadow-sm flex items-center"
+					className="shadow-sm flex items-center"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +57,7 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 						/>
 					</svg>
 					Back to List
-				</button>
+					</Button>
 			</div>
 		</div>
 
@@ -187,16 +189,13 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 				<h3 className="text-lg font-semibold text-gray-900">
 					Maintenance History
 				</h3>
-				<button
+				<Button
 					onClick={toggleShowForm}
-					className={`px-4 py-2 rounded-md transition-colors ${
-						showForm
-							? 'bg-red-500 hover:bg-red-600 text-white'
-							: 'bg-indigo-600 hover:bg-indigo-700 text-white'
-					}`}
+					variant={showForm ? 'danger' : 'primary'}
+					isLoading={loading}
 				>
 					{showForm ? 'Cancel' : 'Add Maintenance'}
-				</button>
+				</Button>
 			</div>
 
 			{showForm && (
@@ -248,10 +247,10 @@ const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => (
 );
 
 // Analytics Tab
-const AnalyticsTab: React.FC = () => (
+const AnalyticsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => (
 	<div>
 		<h3 className="text-lg font-semibold text-gray-900 mb-4">
-			Analytics Unavailable
+			Analytics Unavailable: {vehicle.analyticsUnavailableReason}
 		</h3>
 		<p className="text-gray-600">No usage analytics data in API response.</p>
 	</div>
