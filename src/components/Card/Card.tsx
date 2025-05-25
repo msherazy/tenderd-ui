@@ -1,5 +1,6 @@
 import React from 'react';
 import { useVehicleStore } from '../../features/vehicleStore.ts';
+import { Button } from '../Button'; // Import the Button component
 
 export const LoadingSpinner = () => {
 	return (
@@ -58,10 +59,11 @@ export const EmptyState = () => {
 				Try adjusting your search or filter to find what you're looking for.
 			</p>
 			<div className="mt-6">
-				<button
+				<Button
+					variant="primary"
 					onClick={() => toggleAddForm(true)}
 					type="button"
-					className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-900"
+					className="inline-flex items-center"
 				>
 					<svg
 						className="-ml-1 mr-2 h-5 w-5"
@@ -77,7 +79,7 @@ export const EmptyState = () => {
 						/>
 					</svg>
 					Add Vehicle
-				</button>
+				 </Button>
 			</div>
 		</div>
 	);

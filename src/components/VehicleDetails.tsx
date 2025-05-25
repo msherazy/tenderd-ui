@@ -375,7 +375,7 @@ const AnalyticsTab = () => {
 			 {/* Combined Usage Chart with Toggle */}
 			<div className="bg-gray-50 p-5 rounded-lg shadow-sm">
 				<div className="flex justify-between items-center mb-4">
-					<h3 className="text-lg font-medium text-gray-900">
+					<h3 className="text-base md:text-lg font-medium text-gray-900">
 						{viewMode === 'daily' ? 'Daily Usage & Fuel Consumption' : 'Monthly Trends'}
 					</h3>
 					<div className="flex items-center space-x-2">
