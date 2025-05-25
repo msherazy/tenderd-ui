@@ -163,22 +163,6 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		try {
-			const newEntry = await mutateAsync(formData);
-			// Optionally append newEntry to vehicle.maintenanceHistory here
-			setShowForm(false);
-			setFormData({
-				date: '',
-				description: '',
-				cost: 0,
-				mileage: undefined,
-				serviceCenter: '',
-				notes: '',
-				nextDueDate: undefined,
-			});
-		} catch (err) {
-			// handle validation errors if provided
-		}
 	};
 
 	const handleCancel = () => {

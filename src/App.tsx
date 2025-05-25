@@ -1,201 +1,38 @@
 import './index.css';
-import { useState, useEffect } from 'react';
-import { useVehicleStore } from './features/vehicleStore';
-import { FormSelect, SearchInput } from './components/FormComponents';
-import { useVehicles } from './hooks';
-import { VehicleDetails } from './components/VehicleDetails';
-import { AddVehicleForm } from './components/AddVehicleForm';
-import { useCreateVehicle } from './hooks';
+import { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { VehicleList } from './components/VehicleList.tsx';
 import { Toast } from './components/Toast';
-import { Button } from './components/Button.tsx';
+import VehicleListPage from './pages/VehicleListPage';
+import VehicleDetailsPage from './pages/VehicleDetailsPage';
 
 const App = () => {
-	const { vehicles, loading, error } = useVehicles();
-	const createVehicle = useCreateVehicle();
 	const [toast, setToast] = useState<string | null>(null);
 
-	useEffect(() => {
-		if (error) setToast(error);
-	}, [error]);
-
-	useEffect(() => {
-		if (createVehicle.error) setToast(createVehicle.error);
-	}, [createVehicle.error]);
-
-	const {
-		selectedVehicle,
-		activeTab,
-		showAddForm,
-		formData,
-		formErrors,
-		searchTerm,
-		filterType,
-		filterStatus,
-		sortField,
-		sortDirection,
-
-		selectVehicle,
-		setActiveTab,
-		clearSelectedVehicle,
-		toggleAddForm,
-		updateFormData,
-		setSearchTerm,
-		setFilterType,
-		setFilterStatus,
-		setSortField,
-	} = useVehicleStore();
-
-	const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-		const { name, value } = e.target;
-		updateFormData(name, name === 'year' || name === 'mileage' ? parseInt(value) || 0 : value);
-	};
-
-	const handleFormSubmit = async (e: React.FormEvent) => {
-		e.preventDefault();
-		const isValid = useVehicleStore.getState().validateForm();
-		if (!isValid) return;
-
-		try {
-			const { formData } = useVehicleStore.getState();
-			const newVehicle = await createVehicle.mutateAsync(formData);
-			useVehicleStore.setState(state => ({
-				vehicles: [...state.vehicles, newVehicle],
-				showAddForm: false,
-			}));
-			useVehicleStore.getState().resetFormData();
-		} catch (error) {
-			console.error('Failed to create vehicle:', error);
-			useVehicleStore.setState({ error: (error as Error).message });
-		}
-	};
-
-	// Filter and sort vehicles based on current filters and sort settings
-	const filteredVehicles = vehicles.filter(vehicle => {
-		const matchesSearch =
-			vehicle.make.toLowerCase().includes(searchTerm.toLowerCase()) ||
-			vehicle.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
-			vehicle.licensePlate.toLowerCase().includes(searchTerm.toLowerCase());
-
-		const matchesType = filterType === 'all' || vehicle.type === filterType;
-		const matchesStatus = filterStatus === 'all' || vehicle.status === filterStatus;
-
-		return matchesSearch && matchesType && matchesStatus;
-	});
-
-	const sortedVehicles = [...filteredVehicles].sort((a, b) => {
-		const aValue = a[sortField];
-		const bValue = b[sortField];
-
-		if (aValue === null || aValue === undefined || bValue === null || bValue === undefined) {
-			return 0;
-		}
-		if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
-		if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
-		return 0;
-	});
-
 	return (
-		<div className="flex flex-col min-h-screen">
-			<Header />
-			<main className={`flex-grow bg-gray-50`}>
-				<div className="max-w-[1440px] mx-auto px-4 py-8">
-					<>
+		<BrowserRouter>
+			<div className="flex flex-col min-h-screen">
+				<Header />
+				<main className="flex-grow bg-gray-50">
+					<div className="max-w-[1440px] mx-auto px-4 py-8">
 						{toast && <Toast message={toast} onClose={() => setToast(null)} />}
-						{!selectedVehicle && !showAddForm && (
-							<div className="mb-8">
-								<div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-									<div className="w-full md:w-auto">
-										<SearchInput
-											value={searchTerm}
-											onChange={e => setSearchTerm(e.target.value)}
-											placeholder="Search vehicles..."
-										/>
-									</div>
-									<div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto items-center sm:items-end">
-										{(filterType !== 'all' || filterStatus !== 'all' || searchTerm) && (
-											<Button
-												type="submit"
-												variant="primary"
-												onClick={() => {
-													setFilterType('all');
-													setFilterStatus('all');
-													setSearchTerm('');
-												}}
-											>
-												Clear
-											</Button>
-										)}
-										<FormSelect
-											label="Filter by Type"
-											name="filterType"
-											value={filterType}
-											onChange={e => setFilterType(e.target.value)}
-											options={[
-												{ value: 'all', label: 'Vehicle Types' },
-												{ value: 'Sedan', label: 'Sedan' },
-												{ value: 'SUV', label: 'SUV' },
-												{ value: 'Truck', label: 'Truck' },
-												{ value: 'Van', label: 'Van' },
-												{ value: 'Electric', label: 'Electric' },
-											]}
-											noLabel
-										/>
-										<FormSelect
-											label="Filter by Status"
-											name="filterStatus"
-											value={filterStatus}
-											onChange={e => setFilterStatus(e.target.value)}
-											options={[
-												{ value: 'all', label: 'Statuses' },
-												{ value: 'Active', label: 'Active' },
-												{ value: 'Maintenance', label: 'Maintenance' },
-												{ value: 'Inactive', label: 'Inactive' },
-											]}
-											noLabel
-										/>
-										<Button variant="primary" fullWidth onClick={() => toggleAddForm(true)}>
-											Add Vehicle
-										</Button>
-									</div>
-								</div>
-								<VehicleList
-									vehicles={sortedVehicles}
-									loading={loading}
-									error={error}
-									sortField={sortField}
-									sortDirection={sortDirection}
-									onVehicleSelect={selectVehicle}
-									onSort={setSortField}
-								/>
-							</div>
-						)}
-
-						{selectedVehicle && (
-							<VehicleDetails
-								vehicle={selectedVehicle}
-								activeTab={activeTab}
-								onTabChange={setActiveTab}
-								onBack={clearSelectedVehicle}
+						<Routes>
+							<Route
+								path="/"
+								element={<VehicleListPage setToast={setToast} />}
 							/>
-						)}
-
-						{showAddForm && (
-							<AddVehicleForm
-								formData={formData}
-								formErrors={formErrors}
-								onFormChange={handleFormChange}
-								onFormSubmit={handleFormSubmit}
-								onCancel={() => toggleAddForm(false)}
+							<Route
+								path="/vehicles/:vehicleId"
+								element={<VehicleDetailsPage setToast={setToast} />}
 							/>
-						)}
-					</>
-				</div>
-			</main>
-			<Footer />
-		</div>
+							<Route path="*" element={<Navigate to="/" replace />} />
+						</Routes>
+					</div>
+				</main>
+				<Footer />
+			</div>
+		</BrowserRouter>
 	);
 };
 

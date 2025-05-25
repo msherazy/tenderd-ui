@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { Vehicle } from '../types';
+import type { ApiResponse } from '../services/api';
 import api from '../services/api';
 
 export function useVehicles() {
@@ -10,7 +11,7 @@ export function useVehicles() {
 	useEffect(() => {
 		setLoading(true);
 		api
-			.get('/vehicles')
+			.get<ApiResponse<Vehicle>>('/vehicles')
 			.then(res => setVehicles(res.data.data))
 			.catch(err => setError(err?.response?.data?.message || err.message))
 			.finally(() => setLoading(false));

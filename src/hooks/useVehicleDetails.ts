@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { Vehicle } from '../types';
+import type { ApiResponse } from '../services/api';
+import api from '../services/api';
 
 export function useVehicleDetails(id: string | null) {
 	const [vehicle, setVehicle] = useState<Vehicle | null>(null);
@@ -9,10 +11,10 @@ export function useVehicleDetails(id: string | null) {
 	useEffect(() => {
 		if (!id) return;
 		setLoading(true);
-		fetch(`/api/vehicles/${id}`)
-			.then(res => res.json())
-			.then(data => setVehicle(data))
-			.catch(err => setError(err.message))
+		api
+			.get<ApiResponse<Vehicle>>(`/vehicles/${id}`)
+			.then(res => setVehicle(res.data.data))
+			.catch(err => setError(err?.response?.data?.message || err.message))
 			.finally(() => setLoading(false));
 	}, [id]);
 
