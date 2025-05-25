@@ -1,7 +1,7 @@
 import React from 'react';
-import { useVehicleStore } from '../../features/vehicleStore.ts';
+import { useVehicleStore } from '../../features/vehicleStore';
 import { Index } from '../Button';
-import { t } from '../../utils/locale.ts';
+import { t } from '../../utils/locale';
 
 export const LoadingSpinner = () => {
 	return (
@@ -35,7 +35,7 @@ export const ErrorMessage = ({ message }: { message: string }) => {
 export const EmptyState = () => {
 	const { toggleAddForm } = useVehicleStore();
 	return (
-		<div className="text-center py-12">
+		<div className="text-center py-12" data-testid="empty-state">
 			<svg
 				className="mx-auto h-12 w-12 text-gray-400"
 				fill="none"

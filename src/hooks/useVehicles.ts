@@ -11,8 +11,15 @@ export function useVehicles() {
 	useEffect(() => {
 		setLoading(true);
 		api
-			.get<ApiResponse<Vehicle>>('/vehicles')
-			.then(res => setVehicles(res.data.data))
+			.get<ApiResponse<Vehicle[]>>('/vehicles')
+			.then(res => {
+				if (res.data && Array.isArray(res.data.data)) {
+					setVehicles(res.data.data);
+				} else {
+					console.error('Unexpected API response format:', res.data);
+					setError('Invalid data format received from server');
+				}
+			})
 			.catch(err => setError(err?.response?.data?.message || err.message))
 			.finally(() => setLoading(false));
 	}, []);

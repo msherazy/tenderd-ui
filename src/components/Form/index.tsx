@@ -25,38 +25,63 @@ export const FormInput = ({
 	max,
 	placeholder,
 	noLabel = false,
+	'data-testid': testId, // Add data-testid prop
+	...rest // Rest of props
 }: {
 	label: string;
 	name: string;
 	type?: string;
 	value: string;
-	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 	error?: string;
 	required?: boolean;
 	min?: string;
 	max?: string;
 	placeholder?: string;
 	noLabel?: boolean;
+	'data-testid'?: string; // Add type for data-testid
+	[key: string]: any; // Allow additional props
 }) => {
+	const inputId = `input-${name}`;
+
 	return (
-		<div>
+		<div className="mb-4">
 			{!noLabel && (
-				<label htmlFor={name} className={labelStyles}>
+				<label htmlFor={inputId} className={labelStyles}>
 					{label}
-					{required && <span className="text-red-500 ml-1">*</span>}
+					{required && <span className="text-red-600 ml-1">*</span>}
 				</label>
 			)}
-			<input
-				type={type}
-				name={name}
-				id={name}
-				value={value}
-				onChange={onChange}
-				min={min}
-				max={max}
-				placeholder={placeholder}
-				className={`${inputBaseStyles} ${error ? inputErrorStyles : ''}`}
-			/>
+
+			{type === 'textarea' ? (
+				<textarea
+					id={inputId}
+					name={name}
+					value={value}
+					onChange={onChange}
+					required={required}
+					placeholder={placeholder}
+					className={`${inputBaseStyles} ${error ? inputErrorStyles : ''}`}
+					data-testid={testId} // Apply data-testid to textarea
+					{...rest}
+				/>
+			) : (
+				<input
+					id={inputId}
+					name={name}
+					type={type}
+					value={value}
+					onChange={onChange}
+					required={required}
+					min={min}
+					max={max}
+					placeholder={noLabel ? label : placeholder}
+					className={`${inputBaseStyles} ${error ? inputErrorStyles : ''}`}
+					data-testid={testId} // Apply data-testid to input
+					{...rest}
+				/>
+			)}
+
 			{error && <p className="mt-1 text-sm text-red-600">{error}</p>}
 		</div>
 	);

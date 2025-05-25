@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component Snapshots danger button renders correctly 1`] = `
+<div>
+  <button
+    class="inline-flex items-center justify-center px-4 py-2 rounded font-semibold focus:outline-none transition disabled:opacity-60 w-auto bg-red-600 text-white hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+  >
+    Danger Button
+  </button>
+</div>
+`;
+
+exports[`Button Component Snapshots disabled button renders correctly 1`] = `
+<div>
+  <button
+    class="inline-flex items-center justify-center px-4 py-2 rounded font-semibold focus:outline-none transition disabled:opacity-60 w-auto hover:opacity-90 focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+    disabled=""
+    style="color: rgb(255, 255, 255);"
+  >
+    Disabled Button
+  </button>
+</div>
+`;
+
+exports[`Button Component Snapshots full width button renders correctly 1`] = `
+<div>
+  <button
+    class="inline-flex items-center justify-center px-4 py-2 rounded font-semibold focus:outline-none transition disabled:opacity-60 w-full hover:opacity-90 focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+    style="color: rgb(255, 255, 255);"
+  >
+    Full Width Button
+  </button>
+</div>
+`;
+
+exports[`Button Component Snapshots ghost button renders correctly 1`] = `
+<div>
+  <button
+    class="inline-flex items-center justify-center px-4 py-2 rounded font-semibold focus:outline-none transition disabled:opacity-60 w-auto text-gray-500 hover:text-primary hover:border-primary focus:text-primary focus:border-primary"
+  >
+    Ghost Button
+  </button>
+</div>
+`;
+
+exports[`Button Component Snapshots loading button renders correctly 1`] = `
+<div>
+  <button
+    class="inline-flex items-center justify-center px-4 py-2 rounded font-semibold focus:outline-none transition disabled:opacity-60 w-auto hover:opacity-90 focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+    disabled=""
+    style="color: rgb(255, 255, 255);"
+  >
+    <span
+      class="w-4 h-4 mr-2 border-2 border-t-transparent border-current rounded-full animate-spin"
+    />
+    Loading Button
+  </button>
+</div>
+`;
+
+exports[`Button Component Snapshots primary button renders correctly 1`] = `
+<div>
+  <button
+    class="inline-flex items-center justify-center px-4 py-2 rounded font-semibold focus:outline-none transition disabled:opacity-60 w-auto hover:opacity-90 focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+    style="color: rgb(255, 255, 255);"
+  >
+    Primary Button
+  </button>
+</div>
+`;
+
+exports[`Button Component Snapshots secondary button renders correctly 1`] = `
+<div>
+  <button
+    class="inline-flex items-center justify-center px-4 py-2 rounded font-semibold focus:outline-none transition disabled:opacity-60 w-auto bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-gray-300"
+  >
+    Secondary Button
+  </button>
+</div>
+`;

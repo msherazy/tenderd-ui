@@ -6,7 +6,7 @@ import { Index } from '../Button';
 interface AddVehicleFormProps {
 	formData: VehicleFormData;
 	formErrors: Record<string, string>;
-	onFormChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+	onFormChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
 	onFormSubmit: (e: React.FormEvent) => void;
 	onCancel: () => void;
 }
@@ -27,7 +27,7 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
 				</Index>
 			</div>
 
-			<form onSubmit={onFormSubmit}>
+			<form onSubmit={onFormSubmit} role="form">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<div className="space-y-4 bg-gray-50 p-5 rounded-lg shadow-sm">
 						<h3 className="text-lg font-medium text-gray-900 mb-4 border-b border-gray-200 pb-2">

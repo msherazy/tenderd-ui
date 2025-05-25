@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import type { MaintenanceFormData } from '../../types';
 import { FormInput } from '../Form';
 import { Index } from '../Button';
-import { t } from '../../utils/locale.ts';
+import { t } from '../../utils/locale';
 
 interface AddMaintenanceFormProps {
 	formData: MaintenanceFormData;
@@ -43,58 +43,14 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 		setFormErrors(initialFormErrors);
 	}, [initialFormErrors]);
 
-	// Add field-specific validation on blur
-	const validateField = (field: keyof MaintenanceFormData) => {
-		const errors: Record<string, string> = {};
-
-		switch (field) {
-			case 'mileage':
-				if (formData.mileage !== undefined && formData.mileage !== null) {
-					if (formData.mileage < 0) {
-						errors.mileage = 'Mileage cannot be negative';
-					} else if (formData.mileage > 1000000) {
-						errors.mileage = 'Mileage seems unusually high. Please verify.';
-					}
-				}
-				break;
-
-			case 'nextDueDate':
-				if (formData.nextDueDate) {
-					const nextDueDate = new Date(formData.nextDueDate);
-					const maintenanceDate = formData.date ? new Date(formData.date) : new Date();
-
-					if (nextDueDate <= maintenanceDate) {
-						errors.nextDueDate = 'Next due date must be after the maintenance date';
-					} else {
-						const twoYearsFromNow = new Date();
-						twoYearsFromNow.setFullYear(twoYearsFromNow.getFullYear() + 2);
-
-						if (nextDueDate > twoYearsFromNow) {
-							errors.nextDueDate = 'Next due date is very far in the future. Please verify.';
-						}
-					}
-				}
-				break;
-		}
-
-		// Update found errors
-		if (errors[field]) {
-			updateFormErrors(field, errors[field]);
-			return false;
-		} else {
-			// Clear errors if field is now valid
-			updateFormErrors(field, '');
-			return true;
-		}
-	};
-
 	const validateForm = (): boolean => {
 		const errors: Record<string, string> = {};
+		const today = new Date();
 
 		// Required field validations
 		if (!formData.date) {
 			errors.date = 'Date is required';
-		} else if (new Date(formData.date) > new Date()) {
+		} else if (new Date(formData.date) > today) {
 			errors.date = 'Date cannot be in the future';
 		}
 
@@ -127,7 +83,7 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 			errors.nextDueDate = 'Next due date is required';
 		} else {
 			const nextDueDate = new Date(formData.nextDueDate);
-			const maintenanceDate = formData.date ? new Date(formData.date) : new Date();
+			const maintenanceDate = formData.date ? new Date(formData.date) : today;
 
 			if (nextDueDate <= maintenanceDate) {
 				errors.nextDueDate = 'Next due date must be after the maintenance date';
@@ -149,6 +105,11 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 				updateFormErrors(field, message);
 			});
 			console.log('Validation errors:', errors);
+		} else {
+			// Clear all errors
+			Object.keys(formErrors).forEach(field => {
+				updateFormErrors(field, '');
+			});
 		}
 
 		return !hasErrors;
@@ -165,7 +126,7 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 
 	return (
 		<div className="bg-white shadow-lg rounded-lg p-6 border border-gray-100 custom-card-style">
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} role="form">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 					{/* Maintenance Details Section */}
 					<div className="space-y-4 bg-gray-50 p-5 rounded-lg shadow-sm">
@@ -180,6 +141,7 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 							onChange={onFormChange}
 							error={formErrors.date}
 							required
+							data-testid="maintenance-date-input"
 						/>
 						<FormInput
 							label="Description"
@@ -189,6 +151,7 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 							onChange={onFormChange}
 							error={formErrors.description}
 							required
+							data-testid="maintenance-description-input"
 						/>
 						<FormInput
 							label="Cost"
@@ -199,6 +162,7 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 							error={formErrors.cost}
 							min="0"
 							required
+							data-testid="maintenance-cost-input"
 						/>
 					</div>
 
@@ -213,10 +177,10 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 							type="number"
 							value={formData.mileage?.toString() || ''}
 							onChange={onFormChange}
-							onBlur={() => validateField('mileage')}
 							error={formErrors.mileage}
 							min="0"
 							required
+							data-testid="maintenance-mileage-input"
 						/>
 						<FormInput
 							label="Service Center"
@@ -225,6 +189,7 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 							value={formData.serviceCenter}
 							onChange={onFormChange}
 							error={formErrors.serviceCenter}
+							data-testid="maintenance-service-center-input"
 						/>
 						<FormInput
 							label="Notes"
@@ -233,6 +198,7 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 							value={formData.notes}
 							onChange={onFormChange}
 							error={formErrors.notes}
+							data-testid="maintenance-notes-input"
 						/>
 						<FormInput
 							label="Next Due Date"
@@ -240,9 +206,9 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 							type="date"
 							value={formData.nextDueDate || ''}
 							onChange={onFormChange}
-							onBlur={() => validateField('nextDueDate')}
 							error={formErrors.nextDueDate}
 							required
+							data-testid="maintenance-next-due-date-input"
 						/>
 					</div>
 				</div>

@@ -3,7 +3,7 @@ import type { Vehicle } from '../../types';
 import { StatusBadge, VehicleTypeBadge } from '../Badge';
 import { EmptyState, ErrorMessage, LoadingSpinner } from '../Card';
 import { Index } from '../Button';
-import { t } from '../../utils/locale.ts';
+import { t } from '../../utils/locale';
 
 interface VehicleListProps {
 	vehicles: Vehicle[];

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import type { MaintenanceFormData, Vehicle } from '../../types';
 import { StatusBadge, VehicleTypeBadge } from '../Badge';
 import { DetailRow } from '../Card';
-import { AddMaintenanceForm } from './AddMaintenanceForm.tsx';
+import { AddMaintenanceForm } from './AddMaintenanceForm';
 import { useCreateMaintenance } from '../../hooks';
 import { Index } from '../Button';
-import { t } from '../../utils/locale.ts';
+import { t } from '../../utils/locale';
 import {
 	BarChart,
 	Bar,
@@ -42,7 +42,7 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 					<h2 className="text-2xl font-bold text-gray-900 flex items-center">
 						{vehicle.make} {vehicle.model}
 					</h2>
-					<p className="text-gray-600 mt-1 text-lg">
+					<p className="text-gray-600 mt-1 text-lg" data-testid="vehicle-year-plate">
 						{vehicle.year}
 						{vehicle.licensePlate && (
 							<>
