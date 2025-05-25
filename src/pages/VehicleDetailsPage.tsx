@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from '@tanstack/react-router';
 import { useVehicleDetails } from '../hooks';
-import { VehicleDetails } from '../components/VehicleDetails';
-import { LoadingSpinner, ErrorMessage } from '../components/Card.tsx';
+import { VehicleDetails } from '../components/Vehicle/VehicleDetails.tsx';
+import { LoadingSpinner, ErrorMessage } from '../components/Card';
 import { vehicleDetailsRoute } from '../router';
 
 interface VehicleDetailsPageProps {

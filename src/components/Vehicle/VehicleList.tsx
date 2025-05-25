@@ -1,9 +1,9 @@
 import React from 'react';
-import type { Vehicle } from '../types';
-import { StatusBadge, VehicleTypeBadge } from './Badges.tsx';
-import { EmptyState, ErrorMessage, LoadingSpinner } from './Card.tsx';
-import { Button } from './Button.tsx';
-import { t } from '../utils/locale';
+import type { Vehicle } from '../../types';
+import { StatusBadge, VehicleTypeBadge } from '../Badge';
+import { EmptyState, ErrorMessage, LoadingSpinner } from '../Card';
+import { Index } from '../Button';
+import { t } from '../../utils/locale.ts';
 
 interface VehicleListProps {
 	vehicles: Vehicle[];
@@ -88,9 +88,9 @@ export const VehicleList: React.FC<VehicleListProps> = ({
 								<StatusBadge status={vehicle.status} />
 							</td>
 							<td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-								<Button variant="primary" onClick={() => onVehicleSelect(vehicle)}>
+								<Index variant="primary" onClick={() => onVehicleSelect(vehicle)}>
 									{t('VIEW_DETAILS')}
-								</Button>
+								</Index>
 							</td>
 						</tr>
 					))}

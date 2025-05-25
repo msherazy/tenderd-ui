@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { useVehicleStore } from '../features/vehicleStore';
-import { FormSelect, SearchInput } from '../components/FormComponents';
+import { FormSelect, SearchInput } from '../components/Form';
 import { useVehicles, useCreateVehicle } from '../hooks';
-import { VehicleList } from '../components/VehicleList';
-import { AddVehicleForm } from '../components/AddVehicleForm';
-import { Button } from '../components/Button';
+import { VehicleList } from '../components/Vehicle/VehicleList.tsx';
+import { AddVehicleForm } from '../components/Vehicle/AddVehicleForm.tsx';
+import { Index } from '../components/Button';
 import type { Vehicle } from '../types';
 
 interface VehicleListPageProps {
@@ -47,7 +47,7 @@ const VehicleListPage: React.FC<VehicleListPageProps> = ({ setToast }) => {
   const handleVehicleSelect = (vehicle: Vehicle) => {
     // Ensure vehicle._id exists
     if (vehicle && vehicle._id) {
-      navigate({ to: '/vehicles/$vehicleId', params: { vehicleId: vehicle._id } });
+      navigate({ to: '/Vehicle/$vehicleId', params: { vehicleId: vehicle._id } });
     }
   };
 
@@ -75,12 +75,12 @@ const VehicleListPage: React.FC<VehicleListPageProps> = ({ setToast }) => {
     }
   };
 
-  // Filter and sort vehicles based on current filters and sort settings
+  // Filter and sort Vehicle based on current filters and sort settings
   const filteredVehicles = vehicles.filter(vehicle => {
     const matchesSearch =
-      vehicle.make.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      vehicle.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      vehicle.licensePlate.toLowerCase().includes(searchTerm.toLowerCase());
+      vehicle?.make?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
+      vehicle?.model?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
+      vehicle?.licensePlate?.toLowerCase().includes(searchTerm?.toLowerCase());
 
     const matchesType = filterType === 'all' || vehicle.type === filterType;
     const matchesStatus = filterStatus === 'all' || vehicle.status === filterStatus;
@@ -114,7 +114,7 @@ const VehicleListPage: React.FC<VehicleListPageProps> = ({ setToast }) => {
             </div>
             <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto items-center sm:items-end">
               {(filterType !== 'all' || filterStatus !== 'all' || searchTerm) && (
-                <Button
+                <Index
                   type="submit"
                   variant="primary"
                   onClick={() => {
@@ -124,7 +124,7 @@ const VehicleListPage: React.FC<VehicleListPageProps> = ({ setToast }) => {
                   }}
                 >
                   Clear
-                </Button>
+                </Index>
               )}
               <FormSelect
                 label="Filter by Type"
@@ -154,9 +154,9 @@ const VehicleListPage: React.FC<VehicleListPageProps> = ({ setToast }) => {
                 ]}
                 noLabel
               />
-              <Button variant="primary" fullWidth onClick={() => toggleAddForm(true)}>
+              <Index variant="primary" fullWidth onClick={() => toggleAddForm(true)}>
                 Add Vehicle
-              </Button>
+              </Index>
             </div>
           </div>
           <VehicleList

@@ -55,7 +55,7 @@ export const EN_US = {
 	[LOCALE_KEYS.VEHICLE_ADD]: 'Add Vehicle',
 	[LOCALE_KEYS.VEHICLE_EDIT]: 'Edit Vehicle',
 	[LOCALE_KEYS.VEHICLE_DELETE]: 'Delete Vehicle',
-	[LOCALE_KEYS.VEHICLE_NONE_FOUND]: 'No vehicles found',
+	[LOCALE_KEYS.VEHICLE_NONE_FOUND]: 'No Vehicle found',
 	[LOCALE_KEYS.VEHICLE_SEARCH_ADJUST]:
 		"Try adjusting your search or filter to find what you're looking for.",
 

@@ -5,7 +5,7 @@ export interface ToastProps {
 	onClose: () => void;
 }
 
-export const Toast: React.FC<ToastProps> = ({ message, onClose }) => {
+export const Index: React.FC<ToastProps> = ({ message, onClose }) => {
 	React.useEffect(() => {
 		const timer = setTimeout(onClose, 4000);
 		return () => clearTimeout(timer);

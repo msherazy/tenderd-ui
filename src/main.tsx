@@ -17,7 +17,7 @@ if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
 window.__APP_STATE__ = {
 	setToast: (message: string | null) => {
 		// This will be replaced with the actual setToast function
-		console.log('Toast not initialized yet:', message);
+		console.log('Index not initialized yet:', message);
 	},
 };
 

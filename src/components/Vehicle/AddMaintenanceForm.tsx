@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import type { MaintenanceFormData } from '../types';
-import { FormInput } from './FormComponents';
-import { Button } from './Button';
-import { t } from '../utils/locale';
+import type { MaintenanceFormData } from '../../types';
+import { FormInput } from '../Form';
+import { Index } from '../Button';
+import { t } from '../../utils/locale.ts';
 
 interface AddMaintenanceFormProps {
 	formData: MaintenanceFormData;
@@ -17,7 +17,6 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 	formErrors: initialFormErrors,
 	onFormChange,
 	onFormSubmit,
-	onCancel,
 }) => {
 	// Local state for form errors so we can track them internally before submission
 	const [formErrors, setFormErrors] = useState<Record<string, string>>(initialFormErrors);
@@ -30,7 +29,6 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 			[field]: message,
 		}));
 
-		// Simulate a change event to update parent component's state
 		const simulatedEvent = {
 			target: {
 				name: field,
@@ -158,9 +156,7 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log('Form submitted, validating...');
 		if (validateForm()) {
-			console.log('Validation passed, submitting form');
 			onFormSubmit(e);
 		} else {
 			console.log('Validation failed');
@@ -252,12 +248,9 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 				</div>
 
 				<div className="mt-8 flex justify-end space-x-3">
-					<Button type="button" variant="secondary" onClick={onCancel}>
-						{t('CANCEL')}
-					</Button>
-					<Button type="submit" variant="primary">
+					<Index type="submit" variant="primary">
 						{t('SUBMIT')}
-					</Button>
+					</Index>
 				</div>
 			</form>
 		</div>

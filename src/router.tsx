@@ -17,7 +17,7 @@ export const indexRoute = createRoute({
 
 export const vehicleDetailsRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/vehicles/$vehicleId',
+  path: '/Vehicle/$vehicleId',
   component: () => (
     <VehicleDetailsPage
       setToast={(message) => window.__APP_STATE__.setToast(message)}

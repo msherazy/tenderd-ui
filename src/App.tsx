@@ -1,9 +1,9 @@
 import './index.css';
 import { useState, useEffect } from 'react';
 import { Outlet } from '@tanstack/react-router';
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
-import { Toast } from './components/Toast';
+import { Header } from './components/Header.tsx';
+import { Footer } from './components/Footer.tsx';
+import { Index } from './components/Toast';
 
 const App = () => {
 	const [toast, setToast] = useState<string | null>(null);
@@ -20,7 +20,7 @@ const App = () => {
 			<Header />
 			<main className="flex-grow bg-gray-50">
 				<div className="max-w-[1440px] mx-auto px-4 py-8">
-					{toast && <Toast message={toast} onClose={() => setToast(null)} />}
+					{toast && <Index message={toast} onClose={() => setToast(null)} />}
 					<Outlet />
 				</div>
 			</main>

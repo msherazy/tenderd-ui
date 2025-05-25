@@ -1,7 +1,7 @@
 import React from 'react';
-import { useVehicleStore } from '../features/vehicleStore.ts';
-import { Button } from './Button.tsx';
-import { t } from '../utils/locale.ts';
+import { useVehicleStore } from '../../features/vehicleStore.ts';
+import { Index } from '../Button';
+import { t } from '../../utils/locale.ts';
 
 export const LoadingSpinner = () => {
 	return (
@@ -54,7 +54,7 @@ export const EmptyState = () => {
 			<h3 className="mt-2 text-sm font-medium text-gray-900">{t('VEHICLE_NONE_FOUND')}</h3>
 			<p className="mt-1 text-sm text-gray-500">{t('VEHICLE_SEARCH_ADJUST')}</p>
 			<div className="mt-6">
-				<Button
+				<Index
 					variant="primary"
 					onClick={() => toggleAddForm(true)}
 					type="button"
@@ -74,7 +74,7 @@ export const EmptyState = () => {
 						/>
 					</svg>
 					{t('VEHICLE_ADD')}
-				</Button>
+				</Index>
 			</div>
 		</div>
 	);

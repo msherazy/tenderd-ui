@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import type { MaintenanceFormData, Vehicle } from '../types';
-import { StatusBadge, VehicleTypeBadge } from './Badges';
-import { DetailRow } from './Card.tsx';
-import { AddMaintenanceForm } from './AddMaintenanceForm';
-import { useCreateMaintenance } from '../hooks';
-import { Button } from './Button';
-import { t } from '../utils/locale';
+import type { MaintenanceFormData, Vehicle } from '../../types';
+import { StatusBadge, VehicleTypeBadge } from '../Badge';
+import { DetailRow } from '../Card';
+import { AddMaintenanceForm } from './AddMaintenanceForm.tsx';
+import { useCreateMaintenance } from '../../hooks';
+import { Index } from '../Button';
+import { t } from '../../utils/locale.ts';
 import {
 	BarChart,
 	Bar,
@@ -52,7 +52,7 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 						)}
 					</p>
 				</div>
-				<Button variant="secondary" onClick={onBack} className="shadow-sm flex items-center">
+				<Index variant="secondary" onClick={onBack} className="shadow-sm flex items-center">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						className="h-4 w-4 mr-1"
@@ -68,7 +68,7 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 						/>
 					</svg>
 					{t('BACK_TO_LIST')}
-				</Button>
+				</Index>
 			</div>
 		</div>
 
@@ -151,7 +151,7 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 	});
 	const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
-	const { loading } = useCreateMaintenance(vehicle._id);
+	const { mutateAsync, loading } = useCreateMaintenance(vehicle._id);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value, type } = e.target;
@@ -163,6 +163,9 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		const newEntry = await mutateAsync(formData);
+		console.log('Maintenance added :', newEntry)
+		setShowForm(false);
 	};
 
 	const handleCancel = () => {
@@ -182,13 +185,13 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 		<div>
 			<div className="flex justify-between items-center mb-4">
 				<h3 className="text-lg font-semibold text-gray-900">{t('MAINTENANCE_HISTORY')}</h3>
-				<Button
+				<Index
 					onClick={toggleShowForm}
 					variant={showForm ? 'danger' : 'primary'}
 					isLoading={loading}
 				>
 					{showForm ? t('CANCEL') : t('MAINTENANCE_ADD')}
-				</Button>
+				</Index>
 			</div>
 
 			{showForm && (
@@ -352,18 +355,18 @@ const AnalyticsTab = () => {
 						{viewMode === 'daily' ? 'Daily Usage & Fuel Consumption' : 'Monthly Trends'}
 					</h3>
 					<div className="flex items-center space-x-2">
-						<Button
+						<Index
 							variant={viewMode === 'daily' ? 'primary' : 'secondary'}
 							onClick={() => setViewMode('daily')}
 						>
 							Daily
-						</Button>
-						<Button
+						</Index>
+						<Index
 							variant={viewMode === 'monthly' ? 'primary' : 'secondary'}
 							onClick={() => setViewMode('monthly')}
 						>
 							Monthly
-						</Button>
+						</Index>
 					</div>
 				</div>
 				<div className="h-80">

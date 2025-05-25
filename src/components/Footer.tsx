@@ -1,5 +1,5 @@
 import React from 'react';
-import { t } from '../utils/locale';
+import { t } from '../utils/locale.ts';
 
 export const Footer: React.FC = () => {
 	return (

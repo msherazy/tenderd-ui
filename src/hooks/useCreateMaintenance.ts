@@ -15,6 +15,7 @@ export function useCreateMaintenance(vehicleId: string) {
 		notes?: string;
 		nextDueDate?: string;
 	}) => {
+		console.log(vehicleId, entry);
 		setLoading(true);
 		setError(null);
 		try {
