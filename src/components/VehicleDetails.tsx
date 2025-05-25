@@ -18,16 +18,16 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 	onTabChange,
 	onBack,
 }) => (
-	<div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden border border-gray-100 dark:border-gray-700">
+	<div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100">
 		{/* Header */}
-		<div className="bg-gray-50 dark:bg-gray-800 p-6 border-b border-gray-200 dark:border-gray-700">
+		<div className="bg-gray-50 p-6 border-b border-gray-200">
 			<div className="flex justify-between items-start">
 				<div>
-					<h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center">
+					<h2 className="text-2xl font-bold text-gray-900 flex items-center">
 						{vehicle.make} {vehicle.model}
 						{vehicle.status && <StatusBadge status={vehicle.status} className="ml-3" />}
 					</h2>
-					<p className="text-gray-600 dark:text-gray-300 mt-1 text-lg">
+					<p className="text-gray-600 mt-1 text-lg">
 						{vehicle.year}
 						{vehicle.licensePlate && (
 							<>
@@ -39,7 +39,7 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 				</div>
 				<button
 					onClick={onBack}
-					className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors shadow-sm flex items-center"
+					className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors shadow-sm flex items-center"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +61,7 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 		</div>
 
 		{/* Tabs */}
-		<div className="bg-white dark:bg-gray-800 px-6 border-b border-gray-200 dark:border-gray-700">
+		<div className="bg-white px-6 border-b border-gray-200">
 			<nav className="flex space-x-8">
 				{['details', 'maintenance', 'location', 'analytics'].map(tab => (
 					<button
@@ -69,8 +69,8 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 						onClick={() => onTabChange(tab)}
 						className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
 							activeTab === tab
-								? 'border-indigo-500 text-indigo-600 dark:text-indigo-400'
-								: 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+								? 'border-indigo-500 text-indigo-600'
+								: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
 						}`}
 					>
 						{tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -96,8 +96,8 @@ const DetailsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-			<div className="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-sm">
-				<h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
+			<div className="bg-gray-50 p-5 rounded-lg shadow-sm">
+				<h3 className="text-lg font-medium text-gray-900 mb-4 border-b border-gray-200 pb-2">
 					Basic Information
 				</h3>
 				<div className="space-y-5">
@@ -106,8 +106,8 @@ const DetailsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 					<DetailRow label="Purchase Date" value={new Date(purchaseDate).toLocaleDateString()} />
 				</div>
 			</div>
-			<div className="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-sm">
-				<h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
+			<div className="bg-gray-50 p-5 rounded-lg shadow-sm">
+				<h3 className="text-lg font-medium text-gray-900 mb-4 border-b border-gray-200 pb-2">
 					Specifications
 				</h3>
 				<div className="space-y-5">
@@ -177,12 +177,12 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 	return (
 		<div>
 			<div className="flex justify-between items-center mb-4">
-				<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+				<h3 className="text-lg font-semibold text-gray-900">
 					Maintenance History
 				</h3>
 				<button
 					onClick={() => setShowForm(true)}
-					className="px-4 py-2 bg-indigo-600 dark:bg-indigo-500 text-white rounded-md hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors"
+					className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
 				>
 					Add Maintenance
 				</button>
@@ -198,16 +198,16 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 				/>
 			)}
 
-			<div className="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-sm mt-6">
+			<div className="bg-gray-50 p-5 rounded-lg shadow-sm mt-6">
 				{vehicle.maintenanceHistory?.length ? (
 					<ul className="space-y-3 max-h-64 overflow-y-auto">
 						{vehicle.maintenanceHistory.map(entry => (
 							<li key={entry._id} className="flex flex-col">
-								<div className="flex justify-between text-sm text-gray-700 dark:text-gray-300">
+								<div className="flex justify-between text-sm text-gray-700">
 									<span>{entry.description}</span>
 									<span>{new Date(entry.date).toLocaleDateString()}</span>
 								</div>
-								<div className="text-xs text-gray-500 dark:text-gray-400">
+								<div className="text-xs text-gray-500">
 									Cost: ${entry.cost.toFixed(2)} | Mileage:{' '}
 									{entry.mileage?.toLocaleString() ?? 'N/A'}
 								</div>
@@ -215,7 +215,7 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 						))}
 					</ul>
 				) : (
-					<p className="text-gray-600 dark:text-gray-400">No maintenance records available.</p>
+					<p className="text-gray-600">No maintenance records available.</p>
 				)}
 			</div>
 		</div>
@@ -225,12 +225,12 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 // Location Tab
 const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => (
 	<div>
-		<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Location</h3>
-		<div className="bg-gray-50 dark:bg-gray-800 p-5 rounded-lg shadow-sm">
+		<h3 className="text-lg font-semibold text-gray-900 mb-4">Location</h3>
+		<div className="bg-gray-50 p-5 rounded-lg shadow-sm">
 			{vehicle.location ? (
-				<p className="text-gray-700 dark:text-gray-300">{vehicle.location}</p>
+				<p className="text-gray-700">{vehicle.location}</p>
 			) : (
-				<p className="text-gray-600 dark:text-gray-400">No location data.</p>
+				<p className="text-gray-600">No location data.</p>
 			)}
 		</div>
 	</div>
@@ -239,9 +239,9 @@ const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => (
 // Analytics Tab
 const AnalyticsTab: React.FC = () => (
 	<div>
-		<h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+		<h3 className="text-lg font-semibold text-gray-900 mb-4">
 			Analytics Unavailable
 		</h3>
-		<p className="text-gray-600 dark:text-gray-400">No usage analytics data in API response.</p>
+		<p className="text-gray-600">No usage analytics data in API response.</p>
 	</div>
 );

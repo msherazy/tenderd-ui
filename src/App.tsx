@@ -14,22 +14,7 @@ import { Toast } from './components/Toast';
 const App = () => {
 	const { vehicles, loading, error } = useVehicles();
 	const createVehicle = useCreateVehicle();
-	const [isDarkMode, setIsDarkMode] = useState(false);
 	const [toast, setToast] = useState<string | null>(null);
-
-	useEffect(() => {
-		// Check for the user's preferred color scheme or saved preference
-		const savedTheme = localStorage.getItem('theme');
-		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-		if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-			setIsDarkMode(true);
-			document.documentElement.classList.add('dark');
-		} else {
-			setIsDarkMode(false);
-			document.documentElement.classList.remove('dark');
-		}
-	}, []);
 
 	useEffect(() => {
 		if (error) setToast(error);
@@ -39,20 +24,6 @@ const App = () => {
 		if (createVehicle.error) setToast(createVehicle.error);
 	}, [createVehicle.error]);
 
-	const toggleDarkMode = () => {
-		const newDarkMode = !isDarkMode;
-		setIsDarkMode(newDarkMode);
-
-		if (newDarkMode) {
-			document.documentElement.classList.add('dark');
-			localStorage.setItem('theme', 'dark');
-		} else {
-			document.documentElement.classList.remove('dark');
-			localStorage.setItem('theme', 'light');
-		}
-	};
-
-	// Get state and actions from our store
 	const {
 		selectedVehicle,
 		activeTab,
@@ -117,6 +88,9 @@ const App = () => {
 		const aValue = a[sortField];
 		const bValue = b[sortField];
 
+		if (aValue === null || aValue === undefined || bValue === null || bValue === undefined) {
+			return 0;
+		}
 		if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
 		if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
 		return 0;
@@ -124,8 +98,8 @@ const App = () => {
 
 	return (
 		<div className="flex flex-col min-h-screen">
-			<Header onThemeToggle={toggleDarkMode} isDarkMode={isDarkMode} />
-			<main className={`flex-grow ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-50'}`}>
+			<Header />
+			<main className={`flex-grow bg-gray-50`}>
 				<div className="max-w-[1440px] mx-auto px-4 py-8">
 					<>
 						{toast && <Toast message={toast} onClose={() => setToast(null)} />}

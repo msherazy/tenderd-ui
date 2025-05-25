@@ -1,5 +1,3 @@
-/* ...existing code... */
-
 .icon-button {
 	cursor: pointer;
 	display: inline-flex;
@@ -22,5 +20,3 @@
 .icon-button.danger {
 	color: #e53e3e; /* Keep a consistent red color across themes */
 }
-
-/* ...existing code... */

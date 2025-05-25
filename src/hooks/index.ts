@@ -1,4 +1,4 @@
-export * from './useVehicles';
-export * from './useCreateVehicle';
-export * from './useVehicleDetails';
+export * from './useVehicles.ts';
+export * from './useCreateVehicle.ts';
+export * from './useVehicleDetails.ts';
 export * from './useCreateMaintenance';
