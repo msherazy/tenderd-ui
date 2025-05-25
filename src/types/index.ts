@@ -37,14 +37,13 @@ export interface Maintenance {
 }
 
 export interface MaintenanceFormData {
-	date: string; // e.g. "2025-05-20"
+	date: string;
 	description: string;
 	cost: number;
-
 	mileage?: number;
-	serviceCenter: string; // default to "" if not provided
-	notes: string; // default to "" if not provided
-	nextDueDate?: string; // e.g. "2025-11-20"
+	serviceCenter: string;
+	notes: string;
+	nextDueDate?: string;
 }
 
 export type VehicleFormData = Omit<Vehicle, 'id' | 'dailyUsage' | 'weeklyUsage'>;
