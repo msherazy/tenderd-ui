@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VehicleDetails Component matches snapshot 1`] = `
+<div>
+  <div
+    class="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100"
+  >
+    <div
+      class="bg-gray-50 p-6 border-b border-gray-200"
+    >
+      <div
+        class="flex justify-between items-start"
+      >
+        <div>
+          <h2
+            class="text-2xl font-bold text-gray-900 flex items-center"
+          >
+            Toyota
+             
+            Camry
+          </h2>
+          <p
+            class="text-gray-600 mt-1 text-lg"
+            data-testid="vehicle-year-plate"
+          >
+            2022
+             
+            • 
+            <span
+              class="font-medium"
+            >
+              ABC123
+            </span>
+          </p>
+        </div>
+        <button
+          class="inline-flex items-center justify-center px-4 py-2 rounded font-semibold focus:outline-none transition disabled:opacity-60 w-auto bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 shadow-sm flex items-center"
+        >
+          <svg
+            class="h-4 w-4 mr-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+          Back to List
+        </button>
+      </div>
+    </div>
+    <div
+      class="bg-white px-6 border-b border-gray-200"
+    >
+      <nav
+        class="flex space-x-8"
+      >
+        <button
+          class="py-4 px-1 border-b-2 font-medium text-sm transition-colors border-indigo-500 text-indigo-600"
+        >
+          Details
+        </button>
+        <button
+          class="py-4 px-1 border-b-2 font-medium text-sm transition-colors border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+        >
+          Maintenance
+        </button>
+        <button
+          class="py-4 px-1 border-b-2 font-medium text-sm transition-colors border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+        >
+          Location
+        </button>
+        <button
+          class="py-4 px-1 border-b-2 font-medium text-sm transition-colors border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+        >
+          Analytics
+        </button>
+      </nav>
+    </div>
+    <div
+      class="p-6"
+    >
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 gap-8"
+      >
+        <div
+          class="bg-gray-50 p-5 rounded-lg shadow-sm"
+        >
+          <h3
+            class="text-lg font-medium text-gray-900 mb-4 border-b border-gray-200 pb-2"
+          >
+            Basic Information
+          </h3>
+          <div
+            class="space-y-5"
+          >
+            <div
+              class="grid grid-cols-3 gap-4"
+            >
+              <dt
+                class="text-sm font-medium text-gray-500"
+              >
+                VIN
+              </dt>
+              <dd
+                class="col-span-2 text-sm text-gray-900"
+              >
+                1HGCM82633A123456
+              </dd>
+            </div>
+            <div
+              class="grid grid-cols-3 gap-4"
+            >
+              <dt
+                class="text-sm font-medium text-gray-500"
+              >
+                Fuel Type
+              </dt>
+              <dd
+                class="col-span-2 text-sm text-gray-900"
+              >
+                Gasoline
+              </dd>
+            </div>
+            <div
+              class="grid grid-cols-3 gap-4"
+            >
+              <dt
+                class="text-sm font-medium text-gray-500"
+              >
+                Purchase Date
+              </dt>
+              <dd
+                class="col-span-2 text-sm text-gray-900"
+              >
+                1/1/2022
+              </dd>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-gray-50 p-5 rounded-lg shadow-sm"
+        >
+          <h3
+            class="text-lg font-medium text-gray-900 mb-4 border-b border-gray-200 pb-2"
+          >
+            Specifications
+          </h3>
+          <div
+            class="space-y-5"
+          >
+            <div
+              class="grid grid-cols-3 gap-4"
+            >
+              <dt
+                class="text-sm font-medium text-gray-500"
+              >
+                Type
+              </dt>
+              <dd
+                class="col-span-2 text-sm text-gray-900"
+              >
+                <span
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                >
+                  Sedan
+                </span>
+              </dd>
+            </div>
+            <div
+              class="grid grid-cols-3 gap-4"
+            >
+              <dt
+                class="text-sm font-medium text-gray-500"
+              >
+                Status
+              </dt>
+              <dd
+                class="col-span-2 text-sm text-gray-900"
+              >
+                <span
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"
+                >
+                  Active
+                </span>
+              </dd>
+            </div>
+            <div
+              class="grid grid-cols-3 gap-4"
+            >
+              <dt
+                class="text-sm font-medium text-gray-500"
+              >
+                Mileage
+              </dt>
+              <dd
+                class="col-span-2 text-sm text-gray-900"
+              >
+                15,000 miles
+              </dd>
+            </div>
+            <div
+              class="grid grid-cols-3 gap-4"
+            >
+              <dt
+                class="text-sm font-medium text-gray-500"
+              >
+                Last Service
+              </dt>
+              <dd
+                class="col-span-2 text-sm text-gray-900"
+              >
+                6/1/2022
+              </dd>
+            </div>
+          </div>
+        </div>
+      </div>
+       
+    </div>
+  </div>
+</div>
+`;

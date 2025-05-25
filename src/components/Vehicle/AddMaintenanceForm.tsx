@@ -97,16 +97,13 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 			}
 		}
 
-		// Update all form errors
 		const hasErrors = Object.keys(errors).length > 0;
 		if (hasErrors) {
-			// Set all errors
 			Object.entries(errors).forEach(([field, message]) => {
 				updateFormErrors(field, message);
 			});
 			console.log('Validation errors:', errors);
 		} else {
-			// Clear all errors
 			Object.keys(formErrors).forEach(field => {
 				updateFormErrors(field, '');
 			});

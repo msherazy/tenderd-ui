@@ -6,7 +6,7 @@ describe('AddMaintenanceForm', () => {
   const nextMonth = new Date(today);
   nextMonth.setMonth(today.getMonth() + 1);
 
-  const todayStr = today.toISOString().split('T')[0]; // YYYY-MM-DD format
+  const todayStr = today.toISOString().split('T')[0];
   const nextMonthStr = nextMonth.toISOString().split('T')[0];
 
   const defaultProps = {
@@ -30,35 +30,30 @@ describe('AddMaintenanceForm', () => {
   });
 
   it('renders fields and submit button', () => {
-    render(<AddMaintenanceForm {...defaultProps} />);
-
-    // Use getByLabelText instead of getByTestId since we might have issues with data-testid forwarding
-    expect(screen.getByLabelText('Date')).toBeInTheDocument();
-    expect(screen.getByLabelText('Description')).toBeInTheDocument();
-    expect(screen.getByLabelText('Cost')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /SUBMIT/i })).toBeInTheDocument();
+    const { container } = render(<AddMaintenanceForm {...defaultProps} />);
+    expect(screen.getByTestId('maintenance-date-input')).toBeInTheDocument();
+    expect(screen.getByTestId('maintenance-description-input')).toBeInTheDocument();
+    expect(screen.getByTestId('maintenance-cost-input')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument();
+    expect(container).toMatchSnapshot();
   });
 
   it('calls onFormSubmit when form is submitted', async () => {
     const handleSubmit = jest.fn(e => e.preventDefault());
-
-    // Use fireEvent directly which is more reliable in some cases
-    render(
+    const { container } = render(
       <AddMaintenanceForm
         {...defaultProps}
         onFormSubmit={handleSubmit}
       />
     );
-
-    // Use fireEvent.submit directly on the form element
     const form = screen.getByRole('form');
     fireEvent.submit(form);
-
     expect(handleSubmit).toHaveBeenCalled();
+    expect(container).toMatchSnapshot();
   });
 
   it('shows form errors when present', () => {
-    render(
+    const { container } = render(
       <AddMaintenanceForm
         {...defaultProps}
         formErrors={{
@@ -70,5 +65,6 @@ describe('AddMaintenanceForm', () => {
 
     expect(screen.getByText('Date is required')).toBeInTheDocument();
     expect(screen.getByText('Description is required')).toBeInTheDocument();
+    expect(container).toMatchSnapshot();
   });
 });

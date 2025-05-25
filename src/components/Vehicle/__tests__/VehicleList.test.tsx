@@ -67,18 +67,15 @@ describe('VehicleList Component', () => {
     const headers = screen.getAllByRole('columnheader');
     expect(headers.length).toBeGreaterThanOrEqual(5); // At least 5 columns
 
-    // Check for header content using textContent which is more flexible
     expect(headers.some(h => h.textContent?.includes('Make'))).toBeTruthy();
     expect(headers.some(h => h.textContent?.includes('Model'))).toBeTruthy();
     expect(headers.some(h => h.textContent?.includes('Year'))).toBeTruthy();
     expect(headers.some(h => h.textContent?.includes('Type'))).toBeTruthy();
     expect(headers.some(h => h.textContent?.includes('Status'))).toBeTruthy();
 
-    // Check if vehicle data is displayed correctly
     expect(screen.getByText('Toyota')).toBeInTheDocument();
     expect(screen.getByText('Camry')).toBeInTheDocument();
     expect(screen.getByText('2022')).toBeInTheDocument();
-
     expect(screen.getByText('Honda')).toBeInTheDocument();
     expect(screen.getByText('CR-V')).toBeInTheDocument();
     expect(screen.getByText('2021')).toBeInTheDocument();
@@ -86,13 +83,10 @@ describe('VehicleList Component', () => {
 
   test('displays sort indicators correctly', () => {
     render(<VehicleList {...defaultProps} sortField="model" sortDirection="desc" />);
-
-    // Check that the model column has a sort indicator
     const modelHeader = screen.getByText(/Model/);
     expect(modelHeader.textContent).toContain('↓'); // Down arrow for descending
   });
 
-  // Add a snapshot test
   test('matches snapshot', () => {
     const { container } = render(<VehicleList {...defaultProps} />);
     expect(container).toMatchSnapshot();

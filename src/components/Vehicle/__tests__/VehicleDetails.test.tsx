@@ -50,6 +50,13 @@ describe('VehicleDetails Component', () => {
     onBack: jest.fn()
   };
 
+
+  test('matches snapshot', () => {
+    const { container } = render(<VehicleDetails {...mockProps} />);
+    expect(container).toMatchSnapshot();
+  });
+
+
   test('renders vehicle details correctly', () => {
     render(<VehicleDetails {...mockProps} />);
 
