@@ -201,7 +201,7 @@ exports[`VehicleDetails Component matches snapshot 1`] = `
               <dd
                 class="col-span-2 text-sm text-gray-900"
               >
-                15,000 miles
+                15,000 Kms
               </dd>
             </div>
             <div

@@ -45,7 +45,7 @@ exports[`AddMaintenanceForm calls onFormSubmit when form is submitted 1`] = `
               name="date"
               required=""
               type="date"
-              value="2025-05-25"
+              value="2025-05-26"
             />
           </div>
           <div
@@ -218,7 +218,7 @@ exports[`AddMaintenanceForm calls onFormSubmit when form is submitted 1`] = `
               name="nextDueDate"
               required=""
               type="date"
-              value="2025-06-25"
+              value="2025-06-26"
             />
           </div>
         </div>
@@ -284,7 +284,7 @@ exports[`AddMaintenanceForm renders fields and submit button 1`] = `
               name="date"
               required=""
               type="date"
-              value="2025-05-25"
+              value="2025-05-26"
             />
           </div>
           <div
@@ -457,7 +457,7 @@ exports[`AddMaintenanceForm renders fields and submit button 1`] = `
               name="nextDueDate"
               required=""
               type="date"
-              value="2025-06-25"
+              value="2025-06-26"
             />
           </div>
         </div>
@@ -525,7 +525,7 @@ exports[`AddMaintenanceForm shows form errors when present 1`] = `
               name="date"
               required=""
               type="date"
-              value="2025-05-25"
+              value="2025-05-26"
             />
             <p
               class="mt-1 text-sm text-red-600"
@@ -710,7 +710,7 @@ exports[`AddMaintenanceForm shows form errors when present 1`] = `
               name="nextDueDate"
               required=""
               type="date"
-              value="2025-06-25"
+              value="2025-06-26"
             />
           </div>
         </div>
