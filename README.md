@@ -31,21 +31,34 @@ To run this project locally, follow these steps:
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/yourusername/fleet-dashboard.git
-   cd fleet-dashboard
+   git clone https://github.com/msherazy/tenderd-ui.git
+   cd tenderd-ui
    ```
 
 2. Install dependencies:
+   
+   Using yarn:
    ```sh
    yarn install
+   ```
+   
+   Or using npm:
+   ```sh
+   npm install
    ```
    
 3. Create a `.env` file in the root directory and add the necessary environment variables.
 
 4. Start the development server:
 
+   Using yarn:
    ```sh
    yarn dev
+   ```
+   
+   Or using npm:
+   ```sh
+   npm run dev
    ```
 
 5. Open your browser and navigate to `http://localhost:5173`.
@@ -54,6 +67,7 @@ To run this project locally, follow these steps:
 
 This project includes Docker configuration for easy containerization:
 
+Using yarn:
 ```sh
 # Build the Docker container
 yarn docker:build
@@ -68,8 +82,24 @@ yarn docker:down
 yarn docker:restart
 ```
 
+Using npm:
+```sh
+# Build the Docker container
+npm run docker:build
+
+# Start the containers
+npm run docker:up
+
+# Stop the containers
+npm run docker:down
+
+# Restart the containers
+npm run docker:restart
+```
+
 ## Scripts
 
+Using yarn:
 - `yarn dev`: Starts the development server
 - `yarn build`: Builds the application for production
 - `yarn lint`: Runs ESLint to check for linting errors
@@ -77,6 +107,15 @@ yarn docker:restart
 - `yarn test`: Runs Jest tests
 - `yarn test:watch`: Runs Jest tests in watch mode
 - `yarn preview`: Previews the production build locally
+
+Using npm:
+- `npm run dev`: Starts the development server
+- `npm run build`: Builds the application for production
+- `npm run lint`: Runs ESLint to check for linting errors
+- `npm run prettier`: Formats the code using Prettier
+- `npm run test`: Runs Jest tests
+- `npm run test:watch`: Runs Jest tests in watch mode
+- `npm run preview`: Previews the production build locally
 
 ## Project Structure
 
