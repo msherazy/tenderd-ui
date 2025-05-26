@@ -21,9 +21,8 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 	// Local state for form errors so we can track them internally before submission
 	const [formErrors, setFormErrors] = useState<Record<string, string>>(initialFormErrors);
 
-	// Function to update parent's form errors and our local errors
+	// Function to update parent's form errors and  local errors
 	const updateFormErrors = (field: string, message: string) => {
-		// Update local errors state
 		setFormErrors(prev => ({
 			...prev,
 			[field]: message,

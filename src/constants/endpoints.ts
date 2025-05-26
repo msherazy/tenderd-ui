@@ -1,4 +1,4 @@
 export const ENDPOINTS = {
-	fetch: '/vehicle',
-	register: '/vehicle',
+	VEHICLE: '/vehicle',
+	MAINTENANCE: '/maintenance',
 };

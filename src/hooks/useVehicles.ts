@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import type { Vehicle } from '../types';
 import type { ApiResponse } from '../services/api';
 import api from '../services/api';
+import {ENDPOINTS} from "../constants";
 
 export function useVehicles() {
 	const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -11,13 +12,10 @@ export function useVehicles() {
 	useEffect(() => {
 		setLoading(true);
 		api
-			.get<ApiResponse<Vehicle[]>>('/vehicles')
+			.get<ApiResponse<Vehicle[]>>(ENDPOINTS.VEHICLE)
 			.then(res => {
 				if (res.data && Array.isArray(res.data.data)) {
 					setVehicles(res.data.data);
-				} else {
-					console.error('Unexpected API response format:', res.data);
-					setError('Invalid data format received from server');
 				}
 			})
 			.catch(err => setError(err?.response?.data?.message || err.message))

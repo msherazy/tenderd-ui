@@ -13,14 +13,11 @@ const VehicleDetailsPage: React.FC<VehicleDetailsPageProps> = ({ setToast }) => 
 	const { vehicleId } = useParams({ from: vehicleDetailsRoute.id });
 	const navigate = useNavigate();
 	const [activeTab, setActiveTab] = useState('details');
-
-	// Use the existing hook to fetch vehicle details
 	const { vehicle, loading, error } = useVehicleDetails(vehicleId || '');
 
 	useEffect(() => {
 		if (error) {
 			setToast(error);
-			// If there's an error fetching the vehicle, navigate back to the listing page
 			navigate({ to: '/' });
 		}
 	}, [error, navigate, setToast]);

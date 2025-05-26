@@ -45,7 +45,6 @@ const VehicleListPage: React.FC<VehicleListPageProps> = ({ setToast }) => {
 
 	// Navigate to vehicle details when a vehicle is selected
 	const handleVehicleSelect = (vehicle: Vehicle) => {
-		// Ensure vehicle._id exists
 		if (vehicle && vehicle._id) {
 			navigate({ to: '/Vehicle/$vehicleId', params: { vehicleId: vehicle._id } });
 		}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import api from '../services/api';
 import axios from 'axios';
+import {ENDPOINTS} from "../constants";
 
 export function useCreateMaintenance(vehicleId: string) {
 	const [loading, setLoading] = useState(false);
@@ -15,11 +16,10 @@ export function useCreateMaintenance(vehicleId: string) {
 		notes?: string;
 		nextDueDate?: string;
 	}) => {
-		console.log(vehicleId, entry);
 		setLoading(true);
 		setError(null);
 		try {
-			const res = await api.post(`/maintenance/${vehicleId}`, entry);
+			const res = await api.post(`${ENDPOINTS.MAINTENANCE}/${vehicleId}`, entry);
 			return res.data;
 		} catch (err: unknown) {
 			let msg = 'Failed to add maintenance';

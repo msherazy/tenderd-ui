@@ -44,7 +44,7 @@ To run this project locally, follow these steps:
 3. Create a `.env` file in the root directory and add the following environment variables:
 
    ```dotenv
-   VITE_API_URL=http://localhost:8080/api/v1
+   VITE_API_URL=http://localhost:3000/api/v1
    ```
 
 4. Start the development server:

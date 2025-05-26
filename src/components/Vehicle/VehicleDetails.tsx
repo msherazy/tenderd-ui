@@ -129,7 +129,7 @@ const DetailsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 					{vehicle.status && (
 						<DetailRow label="Status" value={<StatusBadge status={vehicle.status} />} />
 					)}
-					<DetailRow label="Mileage" value={`${vehicle.mileage.toLocaleString()} miles`} />
+					<DetailRow label="Mileage" value={`${vehicle.mileage.toLocaleString()} Kms`} />
 					<DetailRow label="Last Service" value={new Date(lastService).toLocaleDateString()} />
 				</div>
 			</div>
