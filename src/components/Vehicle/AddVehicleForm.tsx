@@ -1,7 +1,7 @@
 import React from 'react';
 import type { VehicleFormData } from '../../types';
 import { FormInput, FormSelect } from '../Form';
-import { Index } from '../Button';
+import { Button } from '../Button/Button';
 
 interface AddVehicleFormProps {
 	formData: VehicleFormData;
@@ -24,9 +24,9 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
 		<div className="bg-white shadow-lg rounded-lg p-6 border border-gray-100">
 			<div className="flex justify-between items-start mb-6">
 				<h2 className="text-2xl font-bold text-gray-900">Add New Vehicle</h2>
-				<Index onClick={onCancel} variant={'danger'}>
+				<Button onClick={onCancel} variant={'danger'}>
 					Cancel
-				</Index>
+				</Button>
 			</div>
 
 			<form onSubmit={onFormSubmit} role="form">
@@ -134,9 +134,9 @@ export const AddVehicleForm: React.FC<AddVehicleFormProps> = ({
 					</div>
 				</div>
 				<div className="mt-8">
-					<Index type="submit" variant="primary">
+					<Button type="submit" variant="primary">
 						Add Vehicle
-					</Index>
+					</Button>
 				</div>
 			</form>
 		</div>

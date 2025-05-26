@@ -6,7 +6,7 @@ import './index.css';
 
 window.__APP_STATE__ = {
 	setToast: (message: string | null) => {
-		console.log('Index not initialized yet:', message);
+		console.log(message);
 	},
 };
 

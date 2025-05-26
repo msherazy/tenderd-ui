@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import type { MaintenanceFormData } from '../../types';
 import { FormInput } from '../Form';
-import { Index } from '../Button';
+import { Button } from '../Button/Button';
 import { t } from '../../utils/locale';
 
 interface AddMaintenanceFormProps {
@@ -207,9 +207,9 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 				</div>
 
 				<div className="mt-8 flex justify-end space-x-3">
-					<Index type="submit" variant="primary">
+					<Button type="submit" variant="primary">
 						{t('SUBMIT')}
-					</Index>
+					</Button>
 				</div>
 			</form>
 		</div>

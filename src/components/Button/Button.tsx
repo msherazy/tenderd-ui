@@ -7,7 +7,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 	fullWidth?: boolean;
 };
 
-export const Index: React.FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
 	variant = 'primary',
 	isLoading,
 	fullWidth = false,

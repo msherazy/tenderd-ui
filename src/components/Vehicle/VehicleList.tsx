@@ -2,7 +2,6 @@ import React from 'react';
 import type { Vehicle } from '../../types';
 import { StatusBadge, VehicleTypeBadge } from '../Badge';
 import { EmptyState, ErrorMessage, LoadingSpinner } from '../Card';
-import { Index } from '../Button';
 import { t } from '../../utils/locale';
 
 interface VehicleListProps {
@@ -88,9 +87,12 @@ export const VehicleList: React.FC<VehicleListProps> = ({
 								<StatusBadge status={vehicle.status} />
 							</td>
 							<td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-								<Index variant="primary" onClick={() => onVehicleSelect(vehicle)}>
+								<span
+									className="text-primary hover:underline cursor-pointer"
+									onClick={() => onVehicleSelect(vehicle)}
+								>
 									{t('VIEW_DETAILS')}
-								</Index>
+								</span>
 							</td>
 						</tr>
 					))}

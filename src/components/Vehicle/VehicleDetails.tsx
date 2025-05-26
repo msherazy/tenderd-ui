@@ -4,7 +4,7 @@ import { StatusBadge, VehicleTypeBadge } from '../Badge';
 import { DetailRow } from '../Card';
 import { AddMaintenanceForm } from './AddMaintenanceForm';
 import { useCreateMaintenance } from '../../hooks';
-import { Index } from '../Button';
+import { Button } from '../Button/Button';
 import { t } from '../../utils/locale';
 import {
 	BarChart,
@@ -59,7 +59,7 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 							)}
 						</p>
 					</div>
-					<Index variant="secondary" onClick={onBack} className="shadow-sm flex items-center">
+					<Button variant="secondary" onClick={onBack} className="shadow-sm flex items-center">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							className="h-4 w-4 mr-1"
@@ -75,7 +75,7 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 							/>
 						</svg>
 						{t('BACK_TO_LIST')}
-					</Index>
+					</Button>
 				</div>
 			</div>
 
@@ -222,13 +222,13 @@ const MaintenanceTab: React.FC<{
 		<div>
 			<div className="flex justify-between items-center mb-4">
 				<h3 className="text-lg font-semibold text-gray-900">{t('MAINTENANCE_HISTORY')}</h3>
-				<Index
+				<Button
 					onClick={toggleShowForm}
 					variant={showForm ? 'danger' : 'primary'}
 					isLoading={loading}
 				>
 					{showForm ? t('CANCEL') : t('MAINTENANCE_ADD')}
-				</Index>
+				</Button>
 			</div>
 
 			{showForm && (
@@ -388,18 +388,18 @@ const AnalyticsTab = () => {
 						{viewMode === 'daily' ? 'Daily Usage & Fuel Consumption' : 'Monthly Trends'}
 					</h3>
 					<div className="flex items-center space-x-2">
-						<Index
+						<Button
 							variant={viewMode === 'daily' ? 'primary' : 'secondary'}
 							onClick={() => setViewMode('daily')}
 						>
 							Daily
-						</Index>
-						<Index
+						</Button>
+						<Button
 							variant={viewMode === 'monthly' ? 'primary' : 'secondary'}
 							onClick={() => setViewMode('monthly')}
 						>
 							Monthly
-						</Index>
+						</Button>
 					</div>
 				</div>
 				<div className="h-80">

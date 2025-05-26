@@ -5,7 +5,7 @@ import { FormSelect, SearchInput } from '../components/Form';
 import { useCreateVehicle, useVehicles } from '../hooks';
 import { VehicleList } from '../components/Vehicle/VehicleList';
 import { AddVehicleForm } from '../components/Vehicle/AddVehicleForm';
-import { Index } from '../components/Button';
+import { Button } from '../components/Button/Button';
 import type { Vehicle } from '../types';
 
 interface VehicleListPageProps {
@@ -121,7 +121,7 @@ const VehicleListPage: React.FC<VehicleListPageProps> = ({ setToast }) => {
 						</div>
 						<div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto items-center sm:items-end">
 							{(filterType !== 'all' || filterStatus !== 'all' || searchTerm) && (
-								<Index
+								<Button
 									type="submit"
 									variant="primary"
 									onClick={() => {
@@ -131,7 +131,7 @@ const VehicleListPage: React.FC<VehicleListPageProps> = ({ setToast }) => {
 									}}
 								>
 									Clear
-								</Index>
+								</Button>
 							)}
 							<FormSelect
 								label="Filter by Type"
@@ -161,9 +161,9 @@ const VehicleListPage: React.FC<VehicleListPageProps> = ({ setToast }) => {
 								]}
 								noLabel
 							/>
-							<Index variant="primary" fullWidth onClick={() => toggleAddForm(true)}>
+							<Button variant="primary" fullWidth onClick={() => toggleAddForm(true)}>
 								Add Vehicle
-							</Index>
+							</Button>
 						</div>
 					</div>
 					<VehicleList
