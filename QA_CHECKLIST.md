@@ -102,4 +102,17 @@ This document provides a comprehensive checklist of use cases and features imple
 - [ ] Forms submit quickly
 - [ ] No memory leaks during extended use
 
+## Automated Testing
+
+- [ ] Jest test suite runs without failures
+- [ ] Unit tests for components:
+  - [ ] Vehicle List component tests pass
+  - [ ] Vehicle Details component tests pass
+  - [ ] Add Vehicle Form component tests pass
+  - [ ] Add Maintenance Form component tests pass
+- [ ] Component snapshots are up to date
+- [ ] Test coverage meets required thresholds
+- [ ] Integration tests verify component interactions
+- [ ] Mock services correctly simulate API behavior
+
 ---
