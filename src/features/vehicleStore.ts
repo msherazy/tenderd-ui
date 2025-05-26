@@ -98,7 +98,6 @@ export const useVehicleStore = create<VehicleState>((set, get) => ({
 
 	validateForm: () => {
 		const { formData } = get();
-		console.log(formData);
 		const errors: Record<string, string> = {};
 
 		if (!formData.make.trim()) errors.make = 'Make is required';

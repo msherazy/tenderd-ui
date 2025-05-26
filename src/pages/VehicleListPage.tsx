@@ -13,7 +13,7 @@ interface VehicleListPageProps {
 }
 
 const VehicleListPage: React.FC<VehicleListPageProps> = ({ setToast }) => {
-	const { vehicles, loading, error } = useVehicles();
+	const { vehicles, loading, error, setVehicles } = useVehicles();
 	const createVehicle = useCreateVehicle();
 	const navigate = useNavigate();
 
@@ -43,7 +43,6 @@ const VehicleListPage: React.FC<VehicleListPageProps> = ({ setToast }) => {
 		setSortField,
 	} = useVehicleStore();
 
-	// Navigate to vehicle details when a vehicle is selected
 	const handleVehicleSelect = (vehicle: Vehicle) => {
 		if (vehicle && vehicle._id) {
 			navigate({ to: '/Vehicle/$vehicleId', params: { vehicleId: vehicle._id } });
@@ -64,11 +63,18 @@ const VehicleListPage: React.FC<VehicleListPageProps> = ({ setToast }) => {
 
 		try {
 			const { formData } = useVehicleStore.getState();
-			const newVehicle = await createVehicle.mutateAsync(formData);
+			const response = await createVehicle.mutateAsync(formData);
+			const newVehicle = response.data;
+
+			// Update both the Zustand store and the local state
 			useVehicleStore.setState(state => ({
 				vehicles: [...state.vehicles, newVehicle],
 				showAddForm: false,
 			}));
+
+			// Update the local state from useVehicles hook
+			setVehicles(currentVehicles => [...currentVehicles, newVehicle]);
+
 			useVehicleStore.getState().resetFormData();
 		} catch (error) {
 			console.error('Failed to create vehicle:', error);

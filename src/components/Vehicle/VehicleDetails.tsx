@@ -33,73 +33,91 @@ export const VehicleDetails: React.FC<VehicleDetailsProps> = ({
 	activeTab,
 	onTabChange,
 	onBack,
-}) => (
-	<div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100">
-		{/* Header */}
-		<div className="bg-gray-50 p-6 border-b border-gray-200">
-			<div className="flex justify-between items-start">
-				<div>
-					<h2 className="text-2xl font-bold text-gray-900 flex items-center">
-						{vehicle.make} {vehicle.model}
-					</h2>
-					<p className="text-gray-600 mt-1 text-lg" data-testid="vehicle-year-plate">
-						{vehicle.year}
-						{vehicle.licensePlate && (
-							<>
-								{' '}
-								• <span className="font-medium">{vehicle.licensePlate}</span>
-							</>
-						)}
-					</p>
+}) => {
+	const [localVehicle, setLocalVehicle] = useState<Vehicle>(vehicle);
+
+	React.useEffect(() => {
+		setLocalVehicle(vehicle);
+	}, [vehicle]);
+
+	return (
+		<div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-100">
+			{/* Header */}
+			<div className="bg-gray-50 p-6 border-b border-gray-200">
+				<div className="flex justify-between items-start">
+					<div>
+						<h2 className="text-2xl font-bold text-gray-900 flex items-center">
+							{localVehicle.make} {localVehicle.model}
+						</h2>
+						<p className="text-gray-600 mt-1 text-lg" data-testid="vehicle-year-plate">
+							{localVehicle.year}
+							{localVehicle.licensePlate && (
+								<>
+									{' '}
+									• <span className="font-medium">{localVehicle.licensePlate}</span>
+								</>
+							)}
+						</p>
+					</div>
+					<Index variant="secondary" onClick={onBack} className="shadow-sm flex items-center">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="h-4 w-4 mr-1"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={2}
+								d="M10 19l-7-7m0 0l7-7m-7 7h18"
+							/>
+						</svg>
+						{t('BACK_TO_LIST')}
+					</Index>
 				</div>
-				<Index variant="secondary" onClick={onBack} className="shadow-sm flex items-center">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						className="h-4 w-4 mr-1"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							strokeWidth={2}
-							d="M10 19l-7-7m0 0l7-7m-7 7h18"
-						/>
-					</svg>
-					{t('BACK_TO_LIST')}
-				</Index>
+			</div>
+
+			{/* Tabs */}
+			<div className="bg-white px-6 border-b border-gray-200">
+				<nav className="flex space-x-8">
+					{['details', 'maintenance', 'location', 'analytics'].map(tab => (
+						<button
+							key={tab}
+							onClick={() => onTabChange(tab)}
+							className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+								activeTab === tab
+									? 'border-indigo-500 text-indigo-600'
+									: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+							}`}
+						>
+							{tab.charAt(0).toUpperCase() + tab.slice(1)}
+						</button>
+					))}
+				</nav>
+			</div>
+
+			{/* Content */}
+			<div className="p-6">
+				{activeTab === 'details' && <DetailsTab vehicle={localVehicle} />}
+				{activeTab === 'maintenance' && (
+					<MaintenanceTab
+						vehicle={localVehicle}
+						onMaintenanceAdded={(newEntry) => {
+							setLocalVehicle(prev => ({
+								...prev,
+								maintenanceHistory: [...(prev.maintenanceHistory || []), newEntry]
+							}));
+						}}
+					/>
+				)}
+				{activeTab === 'location' && <LocationTab vehicle={localVehicle} />}
+				{activeTab === 'analytics' && <AnalyticsTab />} {/*we are mocking the data in this tab*/}
 			</div>
 		</div>
-
-		{/* Tabs */}
-		<div className="bg-white px-6 border-b border-gray-200">
-			<nav className="flex space-x-8">
-				{['details', 'maintenance', 'location', 'analytics'].map(tab => (
-					<button
-						key={tab}
-						onClick={() => onTabChange(tab)}
-						className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
-							activeTab === tab
-								? 'border-indigo-500 text-indigo-600'
-								: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-						}`}
-					>
-						{tab.charAt(0).toUpperCase() + tab.slice(1)}
-					</button>
-				))}
-			</nav>
-		</div>
-
-		{/* Content */}
-		<div className="p-6">
-			{activeTab === 'details' && <DetailsTab vehicle={vehicle} />}
-			{activeTab === 'maintenance' && <MaintenanceTab vehicle={vehicle} />}
-			{activeTab === 'location' && <LocationTab vehicle={vehicle} />}
-			{activeTab === 'analytics' && <AnalyticsTab />} {/*we are mocking the data in this tab*/}
-		</div>
-	</div>
-);
+	);
+};
 
 // Details Tab
 const DetailsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
@@ -138,7 +156,10 @@ const DetailsTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 };
 
 // Maintenance Tab
-const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
+const MaintenanceTab: React.FC<{
+	vehicle: Vehicle;
+	onMaintenanceAdded: (newEntry: any) => void;
+}> = ({ vehicle, onMaintenanceAdded }) => {
 	const [showForm, setShowForm] = useState(false);
 	const [formData, setFormData] = useState<MaintenanceFormData>({
 		date: '',
@@ -163,9 +184,25 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		const newEntry = await mutateAsync(formData);
-		console.log('Maintenance added :', newEntry);
-		setShowForm(false);
+		try {
+			const response = await mutateAsync(formData);
+			const newEntry = response.data;
+
+			onMaintenanceAdded(newEntry);
+
+			setFormData({
+				date: '',
+				description: '',
+				cost: 0,
+				mileage: undefined,
+				serviceCenter: '',
+				notes: '',
+				nextDueDate: undefined,
+			});
+			setShowForm(false);
+		} catch (error) {
+			console.error('Failed to add maintenance:', error);
+		}
 	};
 
 	const handleCancel = () => {
@@ -230,7 +267,6 @@ const MaintenanceTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 
 // Location Tab
 const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
-	// Use the original embed if you want to keep the Tenderd office marker
 	const originalEmbedUrl =
 		'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115638.89114074553!2d54.98881503695701!3d25.077635277788172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6d39dfcc406f%3A0xc2dd0ddf6fbc0db5!2sTenderd%20-%20AI%20Powered%20Fleet%20Management%20Platform!5e0!3m2!1sen!2s!4v1747986284897!5m2!1sen!2s';
 
@@ -268,7 +304,6 @@ const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 				</div>
 
 				<div className="bg-gray-200  rounded-md overflow-hidden h-96">
-					{/* Google Maps Embed iframe */}
 					<iframe
 						src={originalEmbedUrl}
 						width="100%"
@@ -309,7 +344,6 @@ const LocationTab: React.FC<{ vehicle: Vehicle }> = ({ vehicle }) => {
 const AnalyticsTab = () => {
 	const [viewMode, setViewMode] = useState<'daily' | 'monthly'>('daily');
 
-	// Mock analytics data with a consistent structure for charts
 	const dailyData = [
 		{ name: 'Sun', hours: 10, fuel: 42 },
 		{ name: 'Mon', hours: 12, fuel: 45 },
@@ -348,7 +382,6 @@ const AnalyticsTab = () => {
 				))}
 			</div>
 
-			{/* Combined Usage Chart with Toggle */}
 			<div className="bg-gray-50 p-5 rounded-lg shadow-sm">
 				<div className="flex justify-between items-center mb-4">
 					<h3 className="text-base md:text-lg font-medium text-gray-900">

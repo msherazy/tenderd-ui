@@ -24,7 +24,7 @@ export function useCreateVehicle() {
 		} catch (err: unknown) {
 			let msg = 'Failed to add vehicle';
 			if (axios.isAxiosError(err)) {
-				msg = err.response?.data?.message || err.message;
+				msg = err.response?.data?.details || err.message;
 			} else if (err instanceof Error) {
 				msg = err.message;
 			}

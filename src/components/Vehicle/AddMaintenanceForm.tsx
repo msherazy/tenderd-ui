@@ -101,7 +101,6 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 			Object.entries(errors).forEach(([field, message]) => {
 				updateFormErrors(field, message);
 			});
-			console.log('Validation errors:', errors);
 		} else {
 			Object.keys(formErrors).forEach(field => {
 				updateFormErrors(field, '');
@@ -115,8 +114,6 @@ export const AddMaintenanceForm: React.FC<AddMaintenanceFormProps> = ({
 		e.preventDefault();
 		if (validateForm()) {
 			onFormSubmit(e);
-		} else {
-			console.log('Validation failed');
 		}
 	};
 
