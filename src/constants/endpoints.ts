@@ -1,4 +1,4 @@
 export const ENDPOINTS = {
-	VEHICLE: '/vehicle',
+	VEHICLE: '/vehicles',
 	MAINTENANCE: '/maintenance',
 };
